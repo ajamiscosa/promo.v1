@@ -1,0 +1,14 @@
+[2019-03-01 10:54:11.830] [renderer1] [info] no standard startup: not the explorer viewlet
+[2019-03-01 10:54:36.830] [renderer1] [info] no standard startup: not just one text editor
+[2019-03-01 11:48:06.120] [renderer1] [error] Data tree node not found: [object Object]: Error: Data tree node not found: [object Object]
+    at i.e.getDataNode (file:///snap/vscode/77/usr/share/code/resources/app/out/vs/workbench/workbench.main.js:1037:175)
+    at i.<anonymous> (file:///snap/vscode/77/usr/share/code/resources/app/out/vs/workbench/workbench.main.js:1034:638)
+    at file:///snap/vscode/77/usr/share/code/resources/app/out/vs/workbench/workbench.main.js:33:935
+    at Object.next (file:///snap/vscode/77/usr/share/code/resources/app/out/vs/workbench/workbench.main.js:34:33)
+    at file:///snap/vscode/77/usr/share/code/resources/app/out/vs/workbench/workbench.main.js:33:160
+    at new Promise (<anonymous>)
+    at i (file:///snap/vscode/77/usr/share/code/resources/app/out/vs/workbench/workbench.main.js:32:952)
+    at i.e.expand (file:///snap/vscode/77/usr/share/code/resources/app/out/vs/workbench/workbench.main.js:1034:277)
+    at Array.<anonymous> (file:///snap/vscode/77/usr/share/code/resources/app/out/vs/workbench/workbench.main.js:5626:80)
+    at t (file:///snap/vscode/77/usr/share/code/resources/app/out/vs/workbench/workbench.main.js:105:891)
+    at process._tickCallback (internal/process/next_tick.js:68:7)

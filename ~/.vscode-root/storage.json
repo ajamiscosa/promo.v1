@@ -1,0 +1,12 @@
+{
+    "telemetry.machineId": "c0b8dd4fad4b2a9883f63caac7e3df0ac348237707448cd8f2a01a73cc1a51c1",
+    "theme": "vs-dark",
+    "themeBackground": "#1e1e1e",
+    "pickerWorkingDir": "/var/www",
+    "openedPathsList": {
+        "workspaces2": [
+            "file:///var/www/promo.v1"
+        ],
+        "files2": []
+    }
+}

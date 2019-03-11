@@ -1,0 +1,9 @@
+[Info  - 10:54:43 AM] Initialising
+[Info  - 10:54:43 AM] Initialised in 13 ms
+[Info  - 10:54:43 AM] Intelephense 1.0.4
+[Info  - 10:54:43 AM] Indexing started.
+[Warn  - 10:54:44 AM] file:///var/www/promo.v1/vendor/fzaninotto/faker/src/Faker/Provider/nl_BE/Text.php is over the maximum file size of 1000000 bytes.
+[Info  - 10:55:15 AM] Indexing ended. Elapsed 31s.
+[Info  - 10:55:15 AM] Indexed 4257 files. Writing state to /var/www/promo.v1/~/.vscode-root/User/workspaceStorage/f404a1829028a93bd6cf044f4be15782/bmewburn.vscode-intelephense-client/1c6393e6.
+[Info  - 11:31:25 AM] Indexing started.
+[Info  - 11:31:25 AM] Indexing ended. Elapsed 0s.
