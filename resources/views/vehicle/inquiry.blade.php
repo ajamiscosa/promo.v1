@@ -2,6 +2,7 @@
 use Carbon\Carbon;
 @endphp
 @extends('app')
+@section('title','Vehicle Insurance | Inquiry')
 @section('content')
 <nav class="breadcrumb">
    <ol>
@@ -37,164 +38,171 @@ use Carbon\Carbon;
       <div class="promo-graphic"></div>
    </div>
 </aside>
-<form action="/vehicle-insurance/inquiry/store" method="POST">
-   {{ csrf_field() }}
-<div class="wizard-panel step-wizard-panel wizard-plain">
-   <div class="wizard-section clearfix">
-      <div class="col-sm-12 col-md-5 col-lg-6">
-         <h3>When was your <b class='vehicle-name'>{{ $data->name }}</b>  manufactured?</h3>
-         <p>Please indicate the year your car was made.</p>
-      </div>
-      <div class="col-sm-12 col-md-7 col-lg-6">
-         <div class="option-amend extra-years active">
-            <select class="select form-control" id="YearManufactured" name="YearManufactured" required>
-               <option value="-1">- Please Select -</option>
-               @for ($i = Carbon::today()->year-1; $i >= 2007; $i--)
-               <option value="{{ $i }}">{{ $i }}</option>
-               @endfor
-            </select>
-            <label for="ManufacturingYear_Other" class="error">Please select manufacturing year</label>
-         </div>
-      </div>
-      <!-- /ko -->
-   </div>
-</div>
-<div class="wizard-panel step-wizard-panel wizard-plain">
-   <div class="wizard-section clearfix">
-      <div class="col-sm-12 col-md-5 col-lg-6">
-         <h3>What model family is your <b class='vehicle-name'>{{ $data->name }}</b>  car?</h3>
-         <p>Please choose your vehicle's model family.</p>
-      </div>
-      <div class="col-sm-12 col-md-7 col-lg-6">
-         <div class="option-amend extra-years active">
-            <select class="select form-control" id="Model" name="Model" required>
-               <option value="-1">- Please Select -</option>
-               @foreach (App\Make::where('Brand','=',$data->id)->get()  as $item)
-                  <option value="{{ $item->id }}">{{ $item->name }}</option>
-               @endforeach
-               
-            </select>
-            <label for="ManufacturingYear_Other" class="error">Please choose vehicle model family</label>
-         </div>
-      </div>
-      <!-- /ko -->
-   </div>
-</div>
-<div class="wizard-panel step-wizard-panel wizard-plain">
-   <div class="wizard-section clearfix">
-      <div class="col-sm-12 col-md-5 col-lg-6">
-         <h3>What series is your <b class='vehicle-name'>{{ $data->name }}</b>  car?</h3>
-         <p>Please choose your vehicle's variant.</p>
-      </div>
-      <div class="col-sm-12 col-md-7 col-lg-6">
-         <div class="option-amend extra-years active">
-            <select class="select form-control" id="Variant" name="Variant" required>
-               <option value="-1">- Please Select -</option>
-               
-            </select>
-            <label for="ManufacturingYear_Other" class="error">Please indicate vehicle variant</label>
-         </div>
-      </div>
-      <!-- /ko -->
-   </div>
-   <hr/>
-   <div class="wizard-section clearfix">
-         <div class="col-sm-12 col-md-5 col-lg-6">
-            <h3>Thank you! We are now finding the best car insurance for you.</h3>
-            <p>We’ll send you a list of the top quotes for your reference.</p>
-         </div>
-         <div class="col-sm-12 col-md-7 col-lg-6">
-            <ul class="wizard-grid wizard-grid-01">
-               <li>
-                  <!-- ko if: true -->
-                  <div class="form-group ">
-                     <label for="Gender">Gender</label>
-                     <select class="select form-control" name="Gender" id="Gender" type="text"  required>
-                        <option value="">Please Select</option>
-                        <option value="true">Male</option>
-                        <option value="false">Female</option>
+
+<article class="article">
+   <div class="content">
+      <form action="/vehicle-insurance/inquiry/store" method="POST">
+         {{ csrf_field() }}
+         <div class="wizard-panel step-wizard-panel wizard-plain">
+            <div class="wizard-section clearfix">
+               <div class="col-sm-12 col-md-5 col-lg-6">
+                  <h3>When was your <b class='vehicle-name'>{{ $data->name }}</b>  manufactured?</h3>
+                  <p>Please indicate the year your car was made.</p>
+               </div>
+               <div class="col-sm-12 col-md-7 col-lg-6">
+                  <div class="option-amend extra-years active">
+                     <select class="select form-control" id="YearManufactured" name="YearManufactured" required>
+                        <option value="-1">- Please Select -</option>
+                        @for ($i = Carbon::today()->year-1; $i >= 2007; $i--)
+                           <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
                      </select>
+                     <label for="ManufacturingYear_Other" class="error">Please select manufacturing year</label>
                   </div>
-                  <!-- /ko -->
-               </li>
-               <li>
-                  <div class="columns">
-                     <div class="column column-1">
-                        <!-- ko if: true -->
-                        <div class="form-group ">
-                           <label for="FirstName">First Name</label>
-                           <input class="text form-control" name="FirstName" autocomplete="" placeholder="" id="FirstName" type="text" required>
-                        </div>
-                        <!-- /ko -->
-                     </div>
-                     <div class="column column-2">
-                        <!-- ko if: true -->
-                        <div class="form-group ">
-                           <label for="LastName">Last Name</label>
-                           <input class="text form-control" name="LastName" autocomplete="" placeholder="" id="LastName" type="text" required>
-                        </div>
-                        <!-- /ko -->
-                     </div>
-                  </div>
-               </li>
-               <li>
-                  <div class="columns">
-                     <div class="column column-1">
-                        <!-- ko if: true -->
-                        <div class="form-group ">
-                           <label for="PhoneNumber">Phone Number</label>
-                           <input class="text form-control" name="PhoneNumber" autocomplete="" placeholder="" id="PhoneNumber" type="text">
-                        </div>
-                        <!-- /ko -->
-                     </div>
-                     <div class="column column-2">
-                        <!-- ko if: true -->
-                        <div class="form-group ">
-                           <label for="MobileNumber">Mobile Number</label>
-                           <input class="text form-control" name="MobileNumber" autocomplete="" placeholder="" id="MobileNumber">
-                        </div>
-                        <!-- /ko -->
-                     </div>
-                  </div>
-               </li>
-               <li>
-                  <div class="columns">
-                     <div class="column column-1">
-                        <!-- ko if: true -->
-                        <div class="form-group ">
-                           <label for="Email">Email</label>
-                           <input class="text form-control" name="Email" autocomplete="" placeholder="" id="Email" type="email" required>
-                        </div>
-                        <!-- /ko -->
-                     </div>
-                     <div class="column column-2">
-                        <div class="form-group">
-                              <label for="schedule-time">Preferred call time:</label>
-                              <select class="select required form-control" id="schedule-time" name="Schedule" tabindex="8" data-validate="required" data-remarks="TimeAvailable">
-                                 @foreach (App\CallTime::all() as $callTime)
-                                    <option value="{{ $callTime->id }}">{{ $callTime->description }}</option>
-                                 @endforeach
-                              </select>
-                        </div>
-                     </div>
-                  </div>
-               </li>
-
-            </ul>
-            <div class="checkbox">
-                  <label>
-                  <input type="checkbox" id="Agree" name="Agree" class="cmr-agreement" value="true" required>
-                  I allow eCompaMore to collect, store and process my personal information - including but not limited to my name, address, phone number, email, etc., as supplied for transactions on this website. Transactions may include cookie placement, personalized offers, enrollment in its newsletter and others. The use and processing of my information shall be in accordance with applicable laws and eCompareMo’s <a href="https://www.eCompaMore.com/terms-conditions">Terms and Conditions</a> and <a href="https://www.eCompaMore.com/privacy-policy">Privacy Policy</a>, which I confirm to have read and understood.
-                  </label>
+               </div>
+               <!-- /ko -->
             </div>
-            <span class="wizard-help hide"><i class="icon i-action-info-circle-solid i-2x"></i></span>
-            <br/>
-            <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
          </div>
+         <div class="wizard-panel step-wizard-panel wizard-plain">
+            <div class="wizard-section clearfix">
+               <div class="col-sm-12 col-md-5 col-lg-6">
+                  <h3>What model family is your <b class='vehicle-name'>{{ $data->name }}</b>  car?</h3>
+                  <p>Please choose your vehicle's model family.</p>
+               </div>
+               <div class="col-sm-12 col-md-7 col-lg-6">
+                  <div class="option-amend extra-years active">
+                     <select class="select form-control" id="Model" name="Model" required>
+                        <option value="-1">- Please Select -</option>
+                        @foreach (App\Make::where('Brand','=',$data->id)->get()  as $item)
+                           <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
 
-      </div>
+                     </select>
+                     <label for="ManufacturingYear_Other" class="error">Please choose vehicle model family</label>
+                  </div>
+               </div>
+               <!-- /ko -->
+            </div>
+         </div>
+         <div class="wizard-panel step-wizard-panel wizard-plain">
+            <div class="wizard-section clearfix">
+               <div class="col-sm-12 col-md-5 col-lg-6">
+                  <h3>What series is your <b class='vehicle-name'>{{ $data->name }}</b>  car?</h3>
+                  <p>Please choose your vehicle's variant.</p>
+               </div>
+               <div class="col-sm-12 col-md-7 col-lg-6">
+                  <div class="option-amend extra-years active">
+                     <select class="select form-control" id="Variant" name="Variant" required>
+                        <option value="-1">- Please Select -</option>
+
+                     </select>
+                     <label for="ManufacturingYear_Other" class="error">Please indicate vehicle variant</label>
+                  </div>
+               </div>
+               <!-- /ko -->
+            </div>
+            <hr/>
+            <div class="wizard-section clearfix">
+               <div class="col-sm-12 col-md-5 col-lg-6">
+                  <h3>Thank you! We are now finding the best car insurance for you.</h3>
+                  <p>We’ll send you a list of the top quotes for your reference.</p>
+               </div>
+               <div class="col-sm-12 col-md-7 col-lg-6">
+                  <ul class="wizard-grid wizard-grid-01">
+                     <li>
+                        <!-- ko if: true -->
+                        <div class="form-group ">
+                           <label for="Gender">Gender</label>
+                           <select class="select form-control" name="Gender" id="Gender" type="text"  required>
+                              <option value="">Please Select</option>
+                              <option value="true">Male</option>
+                              <option value="false">Female</option>
+                           </select>
+                        </div>
+                        <!-- /ko -->
+                     </li>
+                     <li>
+                        <div class="columns">
+                           <div class="column column-1">
+                              <!-- ko if: true -->
+                              <div class="form-group ">
+                                 <label for="FirstName">First Name</label>
+                                 <input class="text form-control" name="FirstName" autocomplete="" placeholder="" id="FirstName" type="text" required>
+                              </div>
+                              <!-- /ko -->
+                           </div>
+                           <div class="column column-2">
+                              <!-- ko if: true -->
+                              <div class="form-group ">
+                                 <label for="LastName">Last Name</label>
+                                 <input class="text form-control" name="LastName" autocomplete="" placeholder="" id="LastName" type="text" required>
+                              </div>
+                              <!-- /ko -->
+                           </div>
+                        </div>
+                     </li>
+                     <li>
+                        <div class="columns">
+                           <div class="column column-1">
+                              <!-- ko if: true -->
+                              <div class="form-group ">
+                                 <label for="PhoneNumber">Phone Number</label>
+                                 <input class="text form-control" name="PhoneNumber" autocomplete="" placeholder="" id="PhoneNumber" type="text">
+                              </div>
+                              <!-- /ko -->
+                           </div>
+                           <div class="column column-2">
+                              <!-- ko if: true -->
+                              <div class="form-group ">
+                                 <label for="MobileNumber">Mobile Number</label>
+                                 <input class="text form-control" name="MobileNumber" autocomplete="" placeholder="" id="MobileNumber">
+                              </div>
+                              <!-- /ko -->
+                           </div>
+                        </div>
+                     </li>
+                     <li>
+                        <div class="columns">
+                           <div class="column column-1">
+                              <!-- ko if: true -->
+                              <div class="form-group ">
+                                 <label for="Email">Email</label>
+                                 <input class="text form-control" name="Email" autocomplete="" placeholder="" id="Email" type="email" required>
+                              </div>
+                              <!-- /ko -->
+                           </div>
+                           <div class="column column-2">
+                              <div class="form-group">
+                                 <label for="schedule-time">Preferred call time:</label>
+                                 <select class="select required form-control" id="schedule-time" name="Schedule" tabindex="8" data-validate="required" data-remarks="TimeAvailable">
+                                    @foreach (App\CallTime::all() as $callTime)
+                                       <option value="{{ $callTime->id }}">{{ $callTime->description }}</option>
+                                    @endforeach
+                                 </select>
+                              </div>
+                           </div>
+                        </div>
+                     </li>
+
+                  </ul>
+                  <div class="checkbox">
+                     <label>
+                        <input type="checkbox" id="Agree" name="Agree" class="cmr-agreement" value="true" required>
+                        I allow eCompaMore to collect, store and process my personal information - including but not limited to my name, address, phone number, email, etc., as supplied for transactions on this website. Transactions may include cookie placement, personalized offers, enrollment in its newsletter and others. The use and processing of my information shall be in accordance with applicable laws and eCompareMo’s <a href="https://www.eCompaMore.com/terms-conditions">Terms and Conditions</a> and <a href="https://www.eCompaMore.com/privacy-policy">Privacy Policy</a>, which I confirm to have read and understood.
+                     </label>
+                  </div>
+                  <span class="wizard-help hide"><i class="icon i-action-info-circle-solid i-2x"></i></span>
+                  <br/>
+                  <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
+               </div>
+
+            </div>
+         </div>
+      </form>
    </div>
-</form>
+</article>
+
+
 @endsection
 
 @section('scripts')

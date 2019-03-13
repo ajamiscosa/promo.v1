@@ -3,16 +3,16 @@
 <aside class="promo promo-product insurance-theme" role="marquee">
     <div class="container">
         <div class="promo-widget">
-            <form class="promo-widget-form" action="https://www.ecomparemo.com/result/marketplace/ctpl" method="get" data-ga-product="MI_CTPL" data-ga-action="compare" data-product="MI_CTPL" data-track="LandingPage" data-action="promo-widget-form" role="form" novalidate="novalidate">
-                <fieldset>
-                    <strong class="f200 block m-t-2x" align="center">Get legitimate CTPL insurance</strong> <span class="f150 block m-t-0 m-b-2x" align="center">Fast issuance. 100% fixer-proof</span>
-                    <div class="widget cta-widget text-center p-b-2x"><button class="btn btn-default btn-lg btn-block-90 btn-danger" data-action="ga" data-ga-action="compare" data-ga-label="https://www.ecomparemo.com/vehicle-insurance/ctpl" data-ga-product="MI_CTPL"><span>Buy now</span></button></div>
-                </fieldset>
-            </form>
+            <fieldset>
+                <strong class="f200 block m-t-2x" align="center">Get legitimate CTPL insurance</strong> <span class="f150 block m-t-0 m-b-2x" align="center">Fast issuance. 100% fixer-proof</span>
+                <div class="widget cta-widget text-center p-b-2x">
+                    <a href="/ctpl-insurance/inquiry" class="btn btn-default btn-lg btn-block-90 btn-danger"><span>Buy now</span></a>
+                </div>
+            </fieldset>
         </div>
         <div class="promo-photo">
-            <figure class="cover-photo" style="background-image: url(&quot;https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/ctpl-landing-page-banner@1x.jpg&quot;);">
-                <div class="cover-border"><img src="./ctpl_files/img-loader.png" data-srcset="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/ctpl-landing-page-banner@1x.jpg 1x, https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/ctpl-landing-page-banner@2x.jpg 2x" class=" lazyloaded" width="640" height="320" alt="ctpl philippines" srcset="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/ctpl-landing-page-banner@1x.jpg 1x, https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/ctpl-landing-page-banner@2x.jpg 2x"></div>
+            <figure class="cover-photo">
+                <div class="cover-border"><img src="{{ asset('images/img-loader.png') }}"></div>
             </figure>
         </div>
     </div>
@@ -20,7 +20,7 @@
 <main class="main" role="main">
     <article class="article" data-product="MI_CTPL">
         <h1>Get the Best CTPL Insurance Coverage in the Philippines</h1>
-        <p>In the Philippines, car owners are required to purchase Compulsory Third-Party Liability (CTPL) insurance prior to registering their vehicles with the Land Transportation Office (LTO). eCompareMo offers a fast, pocket-friendly, and hassle-free insurance application process for all vehicle owners. We make sure your CTPL policy is delivered within 24 hours.</p>
+        <p>In the Philippines, car owners are required to purchase Compulsory Third-Party Liability (CTPL) insurance prior to registering their vehicles with the Land Transportation Office (LTO). eCompaMore offers a fast, pocket-friendly, and hassle-free insurance application process for all vehicle owners. We make sure your CTPL policy is delivered within 24 hours.</p>
         <h2>What is CTPL?</h2>
         <p>CTPL is a type of insurance coverage that insures a third-party in the event of an accident. This insurance policy is mandated by the Philippine government for all car owners, regardless of whether the vehicle is for personal or commercial use. Application for CTPL is a prerequisite to the registration of a vehicle with the LTO.</p>
         <h2>CTPL sample quotes</h2>

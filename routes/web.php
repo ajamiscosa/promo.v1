@@ -40,8 +40,16 @@ Route::get('/admin/export','ClientController@export');
 
 
 
-Route::get('/vehicle-insurance/ctpl', function () {
-    return view('ctpl');
+Route::get('/ctpl-insurance', function () {
+    return view('vehicle.ctpl');
+});
+
+Route::get('/ctpl-insurance/inquiry', function(){
+    return view('vehicle.ctpl-inquiry');
+});
+
+Route::get('/ctpl-insurance/order', function(Request $request){
+    return view('vehicle.ctpl-order');
 });
 
 Route::get('/personal-accident-insurance', function(){
