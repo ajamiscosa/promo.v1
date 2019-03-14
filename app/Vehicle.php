@@ -6,12 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vehicle extends Model
 {
+    protected $primaryKey = 'id';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'description',
+        'manufacturer',
+        'model',
+        'variant',
+        'transmission',
+        'displacement',
+        'bodytype',
+        'fmv',
+        'year'
     ];
 }
