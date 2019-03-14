@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta http-equiv="Content-Language" content="en">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>Top Car Insurance Providers Philippines: Get Free Quotes In 15 Seconds - eCompareMo</title>
+		<title>@yield('title')</title>
 		<meta name="keywords" content="vehicle insurance,car insurance,auto insurance,comprehensive car insurance">
 		<meta name="msapplication-TileColor" content="#ffffff">
 		<link rel="shortcut icon" href="/favicon.ico">

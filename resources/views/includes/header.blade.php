@@ -11,7 +11,7 @@
                          <div class="column">
                             <ul class="nav child-menu">
                                <li><a id="VehicleInsuranceSubMenu" href="/vehicle-insurance"><i class="icon i-product-vehicle-insurance i-2x"></i>Vehicle Insurance</a></li>
-                               <li><a id="CTPLInsuranceSubMenu" href="/vehicle-insurance/ctpl"><i class="icon i-product-vehicle-insurance i-2x"></i>CTPL Insurance</a></li>
+                               <li><a id="CTPLInsuranceSubMenu" href="/ctpl-insurance"><i class="icon i-product-vehicle-insurance i-2x"></i>CTPL Insurance</a></li>
                                {{-- <li><a id="PropertyInsuranceSubMenu" href="/property-insurance"><i class="icon i-product-property-insurance i-2x"></i>Property Insurance</a></li>
                                <li><a id="HealthInsuranceSubMenu" href="/health-insurance"><i class="icon i-product-health-insurance i-2x"></i>Health Insurance</a></li>
                                <li><a id="PrepaidHealthInsuranceSubMenu" href="/health-insurance/prepaid-healthcard"><i class="icon i-product-health-insurance i-2x"></i>Prepaid Health Insurance</a></li>
@@ -39,8 +39,8 @@
                       <div class="nav-columns">
                          <div class="column column-1">
                             <ul class="nav child-menu">
-                               <li><a id="AboutUs" href="/about-us"><i class="icon i-link-account i-2x"></i>About eCompareMo</a></li>
-                               {{-- <li><a id="PressRelease" href="/about-us/ecomparemo-press-release"><i class="icon i-product-internet-broadband i-2x"></i>Press Releases</a></li>
+                               <li><a id="AboutUs" href="/about-us"><i class="icon i-link-account i-2x"></i>About eCompaMore</a></li>
+                               {{-- <li><a id="PressRelease" href="/about-us/eCompaMore-press-release"><i class="icon i-product-internet-broadband i-2x"></i>Press Releases</a></li>
                                <li><a id="Media" href="/about-us/media"><i class="icon i-product-cable-tv i-2x"></i>Media</a></li>
                                <li><a id="PressKit" href="/about-us/press-kit"><i class="icon i-menu-attachment i-2x"></i>Press Kit</a></li> --}}
                             </ul>
@@ -48,7 +48,7 @@
                          {{-- <div class="column column-1">
                             <span>Latest News</span>
                             <ul class="nav-links">
-                               <li><a href="/about-us/ecomparemo-press-release">Experian Leads Over-Subscribed US$28m Series C Investment in C88</a></li>
+                               <li><a href="/about-us/eCompaMore-press-release">Experian Leads Over-Subscribed US$28m Series C Investment in C88</a></li>
                             </ul>
                          </div> --}}
                       </div>
