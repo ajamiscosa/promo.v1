@@ -82,4 +82,22 @@ class VehicleController extends Controller
     {
         //
     }
+
+    public function queryModel(Request $request){
+        $models = Vehicle::select('model')
+                    ->where('manufacturer','=',$request->manufacturer)
+                    ->where('year','=',$request->year)->distinct()->get()->toArray();
+
+        sort($models);
+        return response()->json(['data'=>$models]);
+    }
+
+    public function queryVariant(Request $request){
+        $variants = Vehicle::select('id','variant', 'transmission', 'displacement')
+                    ->where('model','=',$request->model)
+                    ->where('year','=',$request->year)->get()->toArray();
+
+        sort($variants);
+        return response()->json(['data'=>$variants]);
+    }
 }

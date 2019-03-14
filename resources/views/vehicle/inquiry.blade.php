@@ -73,7 +73,7 @@ use Carbon\Carbon;
                   <div class="option-amend extra-years active">
                      <select class="select form-control" id="Model" name="Model" required>
                         <option value="-1">- Please Select -</option>
-                        @foreach (App\Make::where('Brand','=',$data->id)->get()  as $item)
+                        @foreach (App\Vehicle::where('manufacturer','=',$data->id)->get()  as $item)
                            <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
 
@@ -208,7 +208,7 @@ use Carbon\Carbon;
 @section('scripts')
    <script>
       var agree = $('#Agree').val();
-      
+
       $('#btnSubmit').on('click', function(e) {
          if(!agree) {
             e.preventDefault();
@@ -226,15 +226,23 @@ use Carbon\Carbon;
             value: -1,
             text: '- Please Select -'
          }));
+
+         var $VariantSelect = $("#Variant");
+         $VariantSelect.empty();
+         $VariantSelect.append($('<option>',{
+            value: -1,
+            text: '- Please Select -'
+         }));
+
          $.ajax({
             method: "get",
-            url: "/query/make",
-            data: { year: selectedYear, brand: {{ $data->id }} }
+            url: "/query/vehicle/model",
+            data: { year: selectedYear, manufacturer: {{ $data->id }} }
          }).done(function( msg ) {
             $.each(msg.data, function(i, item){
                $sel.append($('<option>',{
-                  value: item.id,
-                  text: item.name
+                  value: item.model,
+                  text: item.model
                }));
             });
          });
@@ -253,13 +261,13 @@ use Carbon\Carbon;
          }));
          $.ajax({
             method: "get",
-            url: "/query/variant",
+            url: "/query/vehicle/variant",
             data: { year: selectedYear, model: selectedModel }
          }).done(function( msg ) {
             $.each(msg.data, function(i, item){
                $VariantSelect.append($('<option>',{
                   value: item.id,
-                  text: item.description
+                  text: item.variant + ' ' + item.transmission + ' ' + item.displacement
                }));
             });
          });

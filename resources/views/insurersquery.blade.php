@@ -6,7 +6,7 @@
         'bi'=>$bi,
         'pd'=>$pd,
         'aog'=>$aog,
-        'aograte'=>$aograte,
+        'aograte'=>0.003,   // fixed.
         'rate'=>$rate
     ])
     @php($rate+=0.0005)

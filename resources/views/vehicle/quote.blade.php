@@ -1,4 +1,5 @@
 @extends('app')
+@section('title','Vehicle Insurance | Quotation')
 @section('styles')
 <link href="{{ asset('css/css.css') }}" rel="stylesheet" type="text/css">
 @endsection
@@ -147,12 +148,12 @@
 														<option value="3">Compulsory Third Party Liability (CTPL)</option>
 													</select>
 												</div>
-												<input type="hidden" id="VehicleType" value="{{ $inquiry->getVehicleModel()->type }}" />
+												<input type="hidden" id="VehicleType" value="1" />
 												<div class="form-group">
 													<label class="control-label" for="OptimizeInsuredValueAmount">Insured Value</label>
 													<div class="input-group">
 														<span class="input-group-addon">PHP</span>
-														<input id="OptimizeInsuredValueAmount" name="OptimizeInsuredValueAmount" type="text" value="{{ $inquiry->getVehicleVariant()->data->price }}" class="form-control valid">
+														<input id="OptimizeInsuredValueAmount" name="OptimizeInsuredValueAmount" type="text" value="{{ $inquiry->getVehicle()->fmv }}" class="form-control valid">
 													</div>
 													<div class="validation-text"><span class="field-validation-valid" data-valmsg-for="OptimizeInsuredValueAmount" data-valmsg-replace="true"></span></div>
 												</div>
@@ -404,7 +405,7 @@
 						                    <strong data-bind="text: DisplayedCompanyProductName"></strong> <small data-bind="text: ProductRemarks"></small>
 						                </div>
 						                <div class="result-buttons">
-						                    
+
 						<div class="button-row"  data-bind="if : GetQuoteClosingChannelId != 0, visible: GetQuoteClosingChannelId != 0" >
 						<a class="btn btn-default btn-block" data-button-type="link" data-container-type="2"
 						   data-bind="attr: { 'data-analytics' : '{0}|{1}|{2}|{3}'.format('MOT', 'Result_GetQuote_Click', DisplayedCompanyProductName, 5), href : '/Product/{4}/PersonInfo?b2b={0}&ad={1}&id={2}&type={3}'.format('f6942773-ad7a-4ff5-ad50-5a496d8aff1c', 'ecm', ResultGuid, 1, 'MOT') }, css: { lessVisible : GetQuoteClosingChannelId == 3 || GetQuoteClosingChannelId == 4 }">
@@ -444,7 +445,7 @@
 						        Contact Me
 						    </a>
 						</div>
-						
+
 						                </div>
 						            </div>
 						            <div class="result-information p-b-2x to-normal-size">
@@ -539,7 +540,7 @@
 						                        <li>
 						                            <a data-toggle="tab" id="addon-tab" href="#addon" aria-controls="addon">Free add-ons</a>
 						                        </li>
-						                        
+
 						                    </ul>
 						                    <div class="tab-content">
 						                        <div class="tab-pane fade in active" id="coverage">
@@ -654,20 +655,20 @@
 						                                </tbody>
 						                            </table>
 						                        </div>
-						                        
+
 						                    </div>
 						                </div>
 						            </div>
 						        </div>
 						    </div>
-						
+
 						    <!-- ko if: bindProductResultMobileTemplate-->
 						    <div class="item-modal hlo">
 						        <div class="item-modal-wrap">
 						            <div class="item-modal-resize">
 						                <div class="item-modal-head">
 						                    <div class="mobile-button-cancel float-left" data-bind="click: $root.Mobile.mobile_hideProdResultTemplate">Close</div>
-						                    
+
 						                    <div class="text-center" data-bind="text: DisplayedCompanyProductName"></div>
 						                </div>
 						                <div class="item-modal-content">
@@ -743,7 +744,7 @@
 						                                        <label class="control-label">Deductible fee</label>
 						                                        <strong data-bind="text: (Risk[0].Deductible_text ? Risk[0].Deductible_text : ' ')"></strong>
 						                                    </div>
-						
+
 						                                    <div data-bind="foreach: ko.observableArray(Risk).filterByProperty('RiskTypeId', 1, true)">
 						                                        <h5 data-bind="visible : $index() == 0">Other coverage</h5>
 						                                        <strong class="p-l-0 f110" data-bind="text: DisplayedName"></strong>
@@ -760,7 +761,7 @@
 						                                            <strong data-bind="text: (Deductible_text ? Deductible_text : ' ')"></strong>
 						                                        </div>
 						                                    </div>
-						
+
 						                                    <h5>Premium</h5>
 						                                    <div class="m-b-05x">
 						                                        <label class="control-label">Price</label>
@@ -774,7 +775,7 @@
 						                                        <label class="control-label">Deductible fee</label>
 						                                        <strong>&mdash;</strong>
 						                                    </div>
-						
+
 						                                    <div data-bind="foreach: ko.observableArray(AddOn).filterByProperty('isPackage', false)">
 						                                        <h5 data-bind="visible : $index() == 0">Additional coverages</h5>
 						                                        <strong class="p-l-0 f110" data-bind="text: DisplayedName"></strong>
@@ -791,7 +792,7 @@
 						                                            <strong data-bind="text: (Deductible_text ? Deductible_text : '&mdash;')"></strong>
 						                                        </div>
 						                                    </div>
-						
+
 						                                    <h5>
 						                                        Total additional premium
 						                                    </h5>
@@ -807,8 +808,8 @@
 						                                        <label class="control-label">Deductible fee</label>
 						                                        <strong>&mdash;</strong>
 						                                    </div>
-						
-						
+
+
 						                                    <h5>Doc Stamps, EVAT, Local Gov&#39;t Tax</h5>
 						                                    <div class="m-b-05x">
 						                                        <label class="control-label">Price</label>
@@ -822,7 +823,7 @@
 						                                        <label class="control-label">Deductible fee</label>
 						                                        <strong>&mdash;</strong>
 						                                    </div>
-						
+
 						                                    <h5>Total Annual Premium</h5>
 						                                    <div class="m-b-05x">
 						                                        <label class="control-label">Price</label>
@@ -918,45 +919,45 @@
 	    var $ele = $('#x'+id);
 	    $ele.html('<span>Close Details</span><i class="icon i-arrow-up close-button"></i>');
 	});
-	
+
 	$(document).on('hidden.bs.collapse', '.result-content-bot', function() {
 	    var id = $(this).closest(".result-content-bot").attr("id");
 	    var $ele = $('#x'+id);
 	    $ele.html('<span>More Details</span><i class="icon i-arrow-down close-button"></i>');
 	});
-	
+
 	$(document).on('click', '.comparisonCheckbox', function(){
 	    var $parent = $(this).closest('.result-item.result-row');
 	    $parent.toggleClass('active');
 	});
-	
+
 	$(document).on('click', '.nav.nav-tabs li', function(){
 	    $(this).siblings().attr('class', 'inactive').end().toggleClass('inactive active');
 	});
-	
+
 </script>
 <script>
 	$(document).ready(function(){
 	    loadInsurers();
 	});
-	
+
 	$('#OptimizeInsuredValueAmount').on('change', function(){
 	    loadInsurers();
 	});
-	
+
 	$('#BICover_Amount').on('change', function(){
 	    loadInsurers();
 	});
-	
+
 	$('#PDCover_Amount').on('change', function(){
 	    loadInsurers();
 	});
-	
+
 	$('#HasAOG').on('change', function(){
 	    loadInsurers();
 	});
-	
-	
+
+
 	function loadInsurers() {
 	    var _price = $('#OptimizeInsuredValueAmount').val();
 	    var _bi = $('#BICover_Amount').val();
@@ -964,19 +965,19 @@
 	    var _aog = $('#HasAOG').is(":checked");
 	    var _vType = $('#VehicleType').val();
 	    var _aograte = _vType==1?0.005:0.003;
-	
+
 	    $.ajax({
 	        method: "get",
 	        url: "/query/insurer",
 	        data: { price: _price, bi: _bi, pd: _pd, aog: _aog, aograte: _aograte },
 	        success: function(data, textStatus) {
-	            $(".result-row-container").html(data);    
+	            $(".result-row-container").html(data);
 	        },
 	        error: function() {
 	            alert('Not OKay');
 	        }
 	    });
 	}
-	
+
 </script>
 @endsection

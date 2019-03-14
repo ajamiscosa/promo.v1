@@ -22,4 +22,8 @@ class Vehicle extends Model
         'fmv',
         'year'
     ];
+
+    public function getManufacturer(){
+        return $this->belongsTo('App\Manufacturer','manufacturer','id')->firstOrFail();
+    }
 }

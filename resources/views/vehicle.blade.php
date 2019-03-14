@@ -11,10 +11,10 @@
                 {{ csrf_field() }}
                 <fieldset>
                     <div class="form-group">
-                        <label class="white-content" for="card-feature">Vehicle Brand</label> 
+                        <label class="white-content" for="card-feature">Vehicle Brand</label>
                         <select class="select form-control vehicle-type" name="VehicleManufacturerId" id="VehicleManufacturerId" data-ga-label="Vehicle Brand ID">
                             <option value="-1">- Choose brand of vehicle</option>
-                            @foreach(App\Brand::orderBy('name')->get() as $brand)
+                            @foreach(App\Manufacturer::orderBy('name')->get() as $brand)
                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                             @endforeach
                         </select>
@@ -38,8 +38,8 @@
                     <div class="carousel-items carousel-loaded" data-items="1" id="partner-banner" data-desktop="[1200,1]" data-netbook="[1024,1]" data-tablet="[768,1]" data-autoplay="7000" data-rewind="true" style="opacity: 1; display: block;">
                         <div class="outer">
                             <div class="inner" style="width: 2280px; left: 0px; display: block; transition: all 1000ms ease 0s; transform: translate3d(0px, 0px, 0px);">
-                                <div class="item" role="tabpanel" id="partner-banner-01" style="width: 1140px;"><a id="bannerMOTConcierge" href="/campaign/vehicle-insurance-concierge" title="Concierge" target="_blank" data-ga-product="MOT" data-ga-action="ads" data-action="ga" data-ga-label="MOTBannerConcierge"> <img class=" lazyloaded" src="assets/img-loader.png" data-srcset="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/car-insurance-concierge-landing-page-banner@1x.jpg 1x, 
-                                    https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/car-insurance-concierge-landing-page-banner@2x.jpg 2x" width="1140" height="330" alt="Concierge" srcset="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/car-insurance-concierge-landing-page-banner@1x.jpg 1x, 
+                                <div class="item" role="tabpanel" id="partner-banner-01" style="width: 1140px;"><a id="bannerMOTConcierge" href="/campaign/vehicle-insurance-concierge" title="Concierge" target="_blank" data-ga-product="MOT" data-ga-action="ads" data-action="ga" data-ga-label="MOTBannerConcierge"> <img class=" lazyloaded" src="assets/img-loader.png" data-srcset="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/car-insurance-concierge-landing-page-banner@1x.jpg 1x,
+                                    https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/car-insurance-concierge-landing-page-banner@2x.jpg 2x" width="1140" height="330" alt="Concierge" srcset="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/car-insurance-concierge-landing-page-banner@1x.jpg 1x,
                                     https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/car-insurance-concierge-landing-page-banner@2x.jpg 2x"> </a></div>
                             </div>
                         </div>
@@ -424,7 +424,7 @@
                     <fieldset>
                         <strong class="promo-title">Best deal on your car insurance</strong> <span class="promo-text">Compare quotes from leading providers</span>
                         <div class="form-group">
-                            <label class="sr-only" for="card-feature">Vehicle Brand</label> 
+                            <label class="sr-only" for="card-feature">Vehicle Brand</label>
                             <select class="select form-control vehicle-type" name="VehicleManufacturerId" id="VehicleManufacturerId" data-ga-label="Vehicle brandID">
                                 <option value="-1">- Choose brand of vehicle</option>
                                 <option value="1">AUDI</option>

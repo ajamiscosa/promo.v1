@@ -95,7 +95,7 @@ Route::get('/test/xx', function(){
 
 // API
 
-Route::get('/query/make', 'MakeController@query');
-Route::get('/query/variant', 'VariantController@query');
+Route::get('/query/vehicle/model', 'VehicleController@queryModel');
+Route::get('/query/vehicle/variant', 'VehicleController@queryVariant');
 //
 Route::get('/query/insurer','InsurerController@query');

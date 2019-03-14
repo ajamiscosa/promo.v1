@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Brand;
 use Symfony\Component\HttpKernel\Client;
 use App\Client as AppClient;
+use App\Manufacturer;
 
 class InquiryController extends Controller
 {
@@ -106,7 +107,7 @@ class InquiryController extends Controller
     }
 
     public function vehicleInquiry(Request $request){
-        $brand = Brand::find($request->VehicleManufacturerId);
+        $brand = Manufacturer::find($request->VehicleManufacturerId);
 
         return view('vehicle.inquiry', ['data'=>$brand]);
     }

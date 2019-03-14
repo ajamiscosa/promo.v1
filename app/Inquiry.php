@@ -8,9 +8,15 @@ class Inquiry extends Model
 {
 
     public function getVehicleInfo() {
-        $vehicle = $this->getVehicleModel();
-        $variant = $this->getVehicleVariant();
-        return sprintf("%s %s %s %s", $this->year, $vehicle->getBrand()->name, $vehicle->name, $variant->description);
+        $vehicle = $this->getVehicle();
+        return sprintf("%s %s %s %s %s %s",
+            $this->year,
+            $vehicle->getManufacturer()->name,
+            $vehicle->model,
+            $vehicle->variant,
+            $vehicle->transmission,
+            $vehicle->displacement
+        );
     }
 
     public function getVehicleModel() {
@@ -18,15 +24,9 @@ class Inquiry extends Model
         return Make::where('id','=',$variant->make)->first();
     }
 
-    public function getVehicleVariant() {
-        $variantdata = new VariantData();
-        $variantdata = $variantdata
-                            ->where('vid','=',$this->variant)
-                            ->where('year','=',$this->year)->first();
-
-        $variant = Variant::find($this->variant);
-        $variant->data = $variantdata;
-        return $variant;
+    public function getVehicle() {
+        $vehicle = Vehicle::find($this->variant);
+        return $vehicle;
     }
 
     /**
@@ -45,18 +45,18 @@ class Inquiry extends Model
 
     public function generateReferenceNumber() {
         $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        $randomString = ''; 
-  
-        for ($i = 0; $i < 6; $i++) { 
-            $index = rand(0, strlen($characters) - 1); 
-            $randomString .= $characters[$index]; 
-        } 
-    
+        $randomString = '';
+
+        for ($i = 0; $i < 6; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+
         try {
             $inquiry = $this->where('refno','=',$randomString)->firstOrFail();
             $this->generateReferenceNumber();
         }catch(\Exception $e) {
-            $this->refno = $randomString; 
+            $this->refno = $randomString;
         }
 
     }
