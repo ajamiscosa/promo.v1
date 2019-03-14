@@ -1,5 +1,6 @@
 {
     "workbench.iconTheme": "vscode-icons",
     "editor.minimap.enabled": false,
-    "editor.renderWhitespace": "all"
+    "editor.renderWhitespace": "all",
+    "vsicons.dontShowNewVersionMessage": true
 }
