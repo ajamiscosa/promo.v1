@@ -232,9 +232,9 @@
 			@yield('modal')
 			<a class="anchor elevator" data-action="elevator" style="display: inline;"><i class="icon i-arrow-up-mini i-3x">Back to top</i></a>
 		</div>
-		<script type='text/javascript' src="{{ asset('js/popper.min.js') }}"></script>
 		<script type='text/javascript' src="{{ asset('js/tooltip.min.js') }}"></script>
 		<script type='text/javascript' src="{{ asset('js/jquery.min.js') }}"></script>
+		<script type='text/javascript' src="{{ asset('js/popper.min.js') }}"></script>
 		<script type='text/javascript' src="{{ asset('js/bootstrap.min.js') }}"></script>
 		<script type='text/javascript' src="{{ asset('js/fontawesome.min.js') }}"></script>
 		{{-- <script type='text/javascript' src="{{ asset('js/libraries.js') }}"></script> --}}
@@ -243,7 +243,7 @@
 		<script>
 			$(document).ready(function() {
 				$('#HeaderCallScheduleModal').on('click', function(){
-					$('#call-schedule').modal('show');
+					$('#call-schedule').modal('toggle');
 				});
 			});
 			$(document).ready(function(){
@@ -262,7 +262,7 @@
 						}, 800);
 						return false;
 					});
-					
+
 					$('.elevator').tooltip('show');
 
 			});

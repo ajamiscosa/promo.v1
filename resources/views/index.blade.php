@@ -1,70 +1,296 @@
 @extends('app')
+@section('title','Home | eCompaMore')
+@section('styles')
+<script type='text/javascript' src="{{ asset('js/jquery.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('js/popper.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('js/fontawesome.min.js') }}"></script>
+
+<style>
+    .carousel {
+    position: relative
+}
+
+.carousel.pointer-event {
+    -ms-touch-action: pan-y;
+    touch-action: pan-y
+}
+
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden
+}
+
+.carousel-inner::after {
+    display: block;
+    clear: both;
+    content: ""
+}
+
+.carousel-item {
+    position: relative;
+    display: none;
+    float: left;
+    width: 100%;
+    margin-right: -100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: -webkit-transform .6s ease-in-out;
+    transition: transform .6s ease-in-out;
+    transition: transform .6s ease-in-out, -webkit-transform .6s ease-in-out
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .carousel-item {
+        transition: none
+    }
+}
+
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item.active {
+    display: block
+}
+
+.active.carousel-item-right,
+.carousel-item-next:not(.carousel-item-left) {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%)
+}
+
+.active.carousel-item-left,
+.carousel-item-prev:not(.carousel-item-right) {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%)
+}
+
+.carousel-fade .carousel-item {
+    opacity: 0;
+    transition-property: opacity;
+    -webkit-transform: none;
+    transform: none
+}
+
+.carousel-fade .carousel-item-next.carousel-item-left,
+.carousel-fade .carousel-item-prev.carousel-item-right,
+.carousel-fade .carousel-item.active {
+    z-index: 1;
+    opacity: 1
+}
+
+.carousel-fade .active.carousel-item-left,
+.carousel-fade .active.carousel-item-right {
+    z-index: 0;
+    opacity: 0;
+    transition: 0s .6s opacity
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .carousel-fade .active.carousel-item-left,
+    .carousel-fade .active.carousel-item-right {
+        transition: none
+    }
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 15%;
+    color: #fff;
+    text-align: center;
+    opacity: .5;
+    transition: opacity .15s ease
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .carousel-control-next,
+    .carousel-control-prev {
+        transition: none
+    }
+}
+
+.carousel-control-next:focus,
+.carousel-control-next:hover,
+.carousel-control-prev:focus,
+.carousel-control-prev:hover {
+    color: #fff;
+    text-decoration: none;
+    outline: 0;
+    opacity: .9
+}
+
+.carousel-control-prev {
+    left: 0
+}
+
+.carousel-control-next {
+    right: 0
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: no-repeat 50%/100% 100%
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e")
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e")
+}
+
+.carousel-indicators {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: -ms-flexbox;
+    z-index: 300;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-left: 0;
+    margin-right: 15%;
+    margin-left: 15%;
+    list-style: none
+}
+
+.carousel-indicators li {
+    box-sizing: content-box;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    width: 30px;
+    height: 3px;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    opacity: .5;
+    transition: opacity .6s ease
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .carousel-indicators li {
+        transition: none
+    }
+}
+
+.carousel-indicators .active {
+    opacity: 1
+}
+
+.carousel-caption {
+    position: absolute;
+    right: 15%;
+    bottom: 20px;
+    left: 15%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    text-align: center
+}
+</style>
+
+<style>
+        body.modal-open {
+            overflow: visible !important;
+            position: absolute !important;
+            z-index: 300;
+            width: 100%;
+            height:100%;
+        }
+
+    </style>
+@endsection
 @section('content')
-<div class="carousel promo-carousel slide">
-    <div class="carousel-items carousel-loaded" id="promo-carousel" data-single="true" data-items="1" data-nav="carousel-navigation" style="opacity: 1; display: block;">
-        <div class="outer">
-            <div class="inner" style="width: 7704px; left: 0px; display: block;">
-                <div class="item" id="promo-carousel-01" role="tabpanel" style="width: 1284px;">
-                    <aside class="promo promo-home with-background text-center credit-theme" style="background-image:url({{ asset('images/carinsurance-background-min.jpg') }})">
-                        <div class="container">
-                            <div class="promo-content">
-                                <h2 class="f110">Hassle-free <strong class="f180 block">Car Insurance</strong></h2>
-                                <hr class="m-t-1x m-b-05x">
-                                <p class="f110 nowrap">Save up to <strong class="block f260 text-dark m-b-05x">PHP <span class="font-base">10,000</span><sup>*</sup></strong></p>
-                                <a href="/vehicle-insurance" class="btn btn-secondary btn-block btn-lg m-b-1x" title="Compare Now" data-action="ga" data-ga-action="compare_homepage" data-ga-label="" data-ga-product="MOT">Compare Now</a> <span class="o70">It’s free and easy!</span> <span class="o70 pull-right f60">*depending on car model</span>
-                            </div>
-                            <div class="promo-graphic">
-                                <figure class="cover-graphic" style="background-image:url({{ asset('images/carinsurance-model-min.png')}})"><img src="{{ asset('images/carinsurance-model-min.png')}}" width="705" height="450" alt=""></figure>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
-                <div class="item" id="promo-carousel-02" role="tabpanel" style="width: 1284px;">
-                    <aside class="promo promo-home with-background text-center loan-theme" style="background-image:url({{ asset('images/loans-background-min.jpg') }})">
-                        <div class="container">
-                            <div class="promo-content">
-                                <h2 class="f110">Get the best rate for your <strong class="block f170">Personal Loan</strong></h2>
-                                <hr class="m-t-1x m-b-05x">
-                                <p class="f110 nowrap">Lowest interest at <strong class="block f260 text-dark font-base m-b-05x">1.26%</strong></p>
-                                <a href="/vehicle-insurance" class="btn btn-secondary btn-block btn-lg m-b-1x" title="Compare Now" data-action="ga" data-ga-action="compare_homepage" data-ga-label="Loan Amount : 50000, TermsId : 4" data-ga-product="CLO">Compare Now</a> <span class="o70">It’s free and easy!</span>
-                            </div>
-                            <div class="promo-graphic">
-                                <figure class="cover-graphic" style="background-image:url({{ asset('images/loans-model-min.png')}})"><img src="{{ asset('images/loans-model-min.png')}}" width="705" height="450" alt=""></figure>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
-                <div class="item" id="promo-carousel-03" role="tabpanel" style="width: 1284px;">
-                    <aside class="promo promo-home with-background text-center insurance-theme" style="background-image:url({{ asset('images/cc-background-min.jpg')}})">
-                        <div class="container">
-                            <div class="promo-content">
-                                <h2 class="f110">Find the best <strong class="f180 block">Credit Card</strong></h2>
-                                <hr class="m-t-1x m-b-05x">
-                                <p class="f110 nowrap">Take your pick from over <strong class="block f260 text-dark m-b-05x"><span class="font-base">70 cards</span></strong></p>
-                                <a href="/wizard/credit-card" class="btn btn-secondary btn-block btn-lg m-b-1x" title="Compare Now" data-action="ga" data-ga-action="compare_homepage" data-ga-label="" data-ga-product="CC">Compare Now</a> <span class="o70">It’s free and easy!</span>
-                            </div>
-                            <div class="promo-graphic">
-                                <figure class="cover-graphic" style="background-image:url({{ asset('images/cc-model-min.png')}})"><img src="{{ asset('images/cc-model-min.png')}}" width="705" height="450" alt=""></figure>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
-            </div>
-        </div>
+
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+      <li data-target="#demo" data-slide-to="0" class="active"></li>
+      <li data-target="#demo" data-slide-to="1"></li>
+      <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <aside class="promo promo-home with-background text-center credit-theme" style="background-image:url({{ asset('images/carinsurance-background-min.jpg') }})">
+                          <div class="container">
+                              <div class="promo-content">
+                                  <h2 class="f110">Hassle-free <strong class="f180 block">Car Insurance</strong></h2>
+                                  <hr class="m-t-1x m-b-05x">
+                                  <p class="f110 nowrap">Save up to <strong class="block f260 text-dark m-b-05x">PHP <span class="font-base">10,000</span><sup>*</sup></strong></p>
+                                  <a href="/vehicle-insurance" class="btn btn-secondary btn-block btn-lg m-b-1x" title="Compare Now" data-action="ga" data-ga-action="compare_homepage" data-ga-label="" data-ga-product="MOT">Compare Now</a> <span class="o70">It’s free and easy!</span> <span class="o70 pull-right f60">*depending on car model</span>
+                              </div>
+                              <div class="promo-graphic">
+                                  <figure class="cover-graphic" style="background-image:url({{ asset('images/carinsurance-model-min.png')}})"><img src="{{ asset('images/carinsurance-model-min.png')}}" width="705" height="450" alt=""></figure>
+                              </div>
+                          </div>
+                      </aside>
+      </div>
+      <div class="carousel-item">
+        <aside class="promo promo-home with-background text-center loan-theme" style="background-image:url({{ asset('images/loans-background-min.jpg') }})">
+                          <div class="container">
+                              <div class="promo-content">
+                                  <h2 class="f110">Get the best rate for your <strong class="block f170">Personal Loan</strong></h2>
+                                  <hr class="m-t-1x m-b-05x">
+                                  <p class="f110 nowrap">Lowest interest at <strong class="block f260 text-dark font-base m-b-05x">1.26%</strong></p>
+                                  <a href="/vehicle-insurance" class="btn btn-secondary btn-block btn-lg m-b-1x" title="Compare Now" data-action="ga" data-ga-action="compare_homepage" data-ga-label="Loan Amount : 50000, TermsId : 4" data-ga-product="CLO">Compare Now</a> <span class="o70">It’s free and easy!</span>
+                              </div>
+                              <div class="promo-graphic">
+                                  <figure class="cover-graphic" style="background-image:url({{ asset('images/loans-model-min.png')}})"><img src="{{ asset('images/loans-model-min.png')}}" width="705" height="450" alt=""></figure>
+                              </div>
+                          </div>
+                      </aside>
+      </div>
+      <div class="carousel-item">
+        <aside class="promo promo-home with-background text-center insurance-theme" style="background-image:url({{ asset('images/cc-background-min.jpg')}})">
+                          <div class="container">
+                              <div class="promo-content">
+                                  <h2 class="f110">Find the best <strong class="f180 block">Credit Card</strong></h2>
+                                  <hr class="m-t-1x m-b-05x">
+                                  <p class="f110 nowrap">Take your pick from over <strong class="block f260 text-dark m-b-05x"><span class="font-base">70 cards</span></strong></p>
+                                  <a href="/wizard/credit-card" class="btn btn-secondary btn-block btn-lg m-b-1x" title="Compare Now" data-action="ga" data-ga-action="compare_homepage" data-ga-label="" data-ga-product="CC">Compare Now</a> <span class="o70">It’s free and easy!</span>
+                              </div>
+                              <div class="promo-graphic">
+                                  <figure class="cover-graphic" style="background-image:url({{ asset('images/cc-model-min.png')}})"><img src="{{ asset('images/cc-model-min.png')}}" width="705" height="450" alt=""></figure>
+                              </div>
+                          </div>
+                      </aside>
+      </div>
     </div>
-    <div class="carousel-navigation hidden-xs hidden-sm" role="tablist">
-        <ol>
-            <li data-action="carousel" data-target="#promo-carousel" aria-controls="promo-carousel-01" role="tab" class="active"><strong>Car Insurance</strong> <span>Compare premiums, accredited motorshops, and offers by top providers and get the best deal.</span></li>
-            <li data-action="carousel" data-target="#promo-carousel" aria-controls="promo-carousel-02" role="tab"><strong>Personal Loans</strong> <span>Compare interest rates and find what you need in seconds.</span></li>
-            <li data-action="carousel" data-target="#promo-carousel" aria-controls="promo-carousel-03" role="tab"><strong>Credit Cards</strong> <span>Compare the best credit cards with cashback, rewards, air miles and free gifts.</span></li>
-        </ol>
-    </div>
-    <ol class="carousel-pager visible-xs visible-sm" role="tablist">
-        <li data-action="carousel" data-target="#promo-carousel" aria-controls="promo-carousel-01" role="tab" class="active"><span>2</span></li>
-        <li data-action="carousel" data-target="#promo-carousel" aria-controls="promo-carousel-02" role="tab"><span>3</span></li>
-        <li data-action="carousel" data-target="#promo-carousel" aria-controls="promo-carousel-03" role="tab"><span>4</span></li>
-    </ol>
-</div>
+
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
+  </div>
 <main class="main" role="main">
     <article class="article" data-track="HomePage" data-product="Home">
         <div class="home-panel home-intro">
@@ -107,7 +333,7 @@
             <hr class="seperator">
             <p class="f130 m-b-3x">Compare a variety of insurance products</p>
             <div class="carousel product-carousel m-t-3x m-b-4x">
-                <div class="carousel-items carousel-loaded" id="product-carousel" style="opacity: 1; display: block;">
+                <div class="carousel-item carousel-loaded" id="product-carousel" style="opacity: 1; display: block;">
                     <div class="outer">
                         <div class="inner" style="width: 4560px; left: 0px; display: block;">
                             <div class="item" id="product-carousel-01" role="tabpanel" style="width: 380px;">

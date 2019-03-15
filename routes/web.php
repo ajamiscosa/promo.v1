@@ -99,3 +99,6 @@ Route::get('/query/vehicle/model', 'VehicleController@queryModel');
 Route::get('/query/vehicle/variant', 'VehicleController@queryVariant');
 //
 Route::get('/query/insurer','InsurerController@query');
+//
+Route::get('/query/cities','CityController@query');
+Route::get('/query/brgy','BarangayController@query');

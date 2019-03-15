@@ -1,4 +1,5 @@
 @extends('app')
+@section('title','Dashboard | Administrator')
 @section('content')
 <nav class="breadcrumb">
         <ol typeof="BreadcrumbList">
@@ -19,10 +20,17 @@
     <main class="main" role="main">
         <article class="article">
             <div class="content">
-                <h1>Contacts Table</h1>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h1>Contacts Table</h1>
+                    </div>
+                    <div class="col-lg-6">
+                        <a class="btn btn-ghost-default pull-right" href="/admin/export" target="_blank">Export Contact List</a>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <table id="ordersTable" class="table styled scope table-insurance" cellspacing="0" width="100%">
+                        <table id="ordersTable" class="table scope table-insurance" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Client</th>
@@ -62,7 +70,7 @@
                                     <td>{{ $inquiry->contacted ? "YES":"NO" }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a type="button" class="btn btn-primary btn-xs">View</a>
+                                        <a type="button" href="/admin/inquiry/view/{{ $inquiry->refno }}" class="btn btn-primary btn-xs">View</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -73,8 +81,5 @@
                 </div>
             </div>
         </article>
-            <aside>
-                <a class="btn btn-ghost-default btn-block" href="/admin/export" target="_blank">Export Contact List</a>
-            </aside>
     </main>
 @endsection

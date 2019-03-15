@@ -43,10 +43,10 @@
         <div class="content">
             <form class="product-marketplace-form" id="product-marketplace-form" aria-owns="product-marketplace-action" action="00j-canvas-wizard-marketplace-(ctpl-insurance)-(step-b).html" method="get" novalidate="novalidate">
                 <fieldset>
-                    <div class="cards card-grid card-grid-04" id="card-grid">
+                    <div class="col-lg-12" id="card-grid">
                         <section class="card">
                             <div class="card-info">
-                                <figure><img src="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-vehicle-insurance.png" srcset="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-vehicle-insurance.png 1x, https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-vehicle-insurance@2x.png 2x" data-srcset="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-vehicle-insurance.png 1x, https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-vehicle-insurance@2x.png 2x" class=" lazyloaded" width="146" height="92" alt="Private car insurance"></figure>
+                                <figure><img src="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-vehicle-insurance.png" alt="Private car insurance"></figure>
                                 <h3>Private car</h3>
                                 <p><em>(Sedan, SUV, AUV or Jeep)</em></p>
                             </div>
@@ -54,7 +54,7 @@
                         </section>
                         <section class="card">
                             <div class="card-info">
-                                <figure><img src="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-commercial-vehicle-insurance.png" srcset="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-commercial-vehicle-insurance.png 1x, https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-commercial-vehicle-insurance@2x.png 2x" data-srcset="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-commercial-vehicle-insurance.png 1x, https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-commercial-vehicle-insurance@2x.png 2x" class=" lazyloaded" width="146" height="92" alt="Private car insurance"></figure>
+                                <figure><img src="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-commercial-vehicle-insurance.png" alt="Private car insurance"></figure>
                                 <h3>Commercial vehicle</h3>
                                 <p><em>(taxi or light to medium trucks)</em></p>
                             </div>
@@ -62,19 +62,11 @@
                         </section>
                         <section class="card">
                             <div class="card-info">
-                                <figure><img src="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-truck-insurance.png" srcset="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-truck-insurance.png 1x, https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-truck-insurance@2x.png 2x" data-srcset="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-truck-insurance.png 1x, https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-truck-insurance@2x.png 2x" class=" lazyloaded" width="146" height="92" alt="Private car insurance"></figure>
+                                <figure><img src="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-truck-insurance.png" alt="Private car insurance"></figure>
                                 <h3>Heavy vehicle</h3>
                                 <p><em>(heavy truck or private bus)</em></p>
                             </div>
                             <div class="card-data"><strong><em>PHP </em>1,250.40</strong> <a href="/ctpl-order-page?VehicleTypeId=3" data-action="ga" data-ga-action="result" data-ga-label="/result/marketplace/ctpl" data-ga-product="MI_CTPL" class="btn btn-default btn-block btn-sm">Get Quote</a></div>
-                        </section>
-                        <section class="card">
-                            <div class="card-info">
-                                <figure><img src="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-motorbike-insurance.png" srcset="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-motorbike-insurance.png 1x, https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-motorbike-insurance@2x.png 2x" data-srcset="https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-motorbike-insurance.png 1x, https://cdn-vz-main.ecomparemo.com/media/Default/eCompareMo/marketplace-card-motorbike-insurance@2x.png 2x" class=" lazyloaded" width="146" height="92" alt="Private car insurance"></figure>
-                                <h3>Motorbike</h3>
-                                <p><em>(trailer, motorcycle or tricycles)</em></p>
-                            </div>
-                            <div class="card-data"><strong><em>PHP </em>300.40</strong> <a href="/ctpl-order-page?VehicleTypeId=4" data-action="ga" data-ga-action="result" data-ga-label="/result/marketplace/ctpl" data-ga-product="MI_CTPL" class="btn btn-default btn-block btn-sm">Get Quote</a></div>
                         </section>
                     </div>
                 </fieldset>
