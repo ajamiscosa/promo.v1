@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Barangay;
+use App\Fee;
 use Illuminate\Http\Request;
 
-class BarangayController extends Controller
+class FeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class BarangayController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Barangay  $barangay
+     * @param  \App\Fee  $fee
      * @return \Illuminate\Http\Response
      */
-    public function show(Barangay $barangay)
+    public function show(Fee $fee)
     {
         //
     }
@@ -52,10 +52,10 @@ class BarangayController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Barangay  $barangay
+     * @param  \App\Fee  $fee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Barangay $barangay)
+    public function edit(Fee $fee)
     {
         //
     }
@@ -64,10 +64,10 @@ class BarangayController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Barangay  $barangay
+     * @param  \App\Fee  $fee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Barangay $barangay)
+    public function update(Request $request, Fee $fee)
     {
         //
     }
@@ -75,19 +75,11 @@ class BarangayController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Barangay  $barangay
+     * @param  \App\Fee  $fee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Barangay $barangay)
+    public function destroy(Fee $fee)
     {
         //
-    }
-
-
-    public function query(Request $request){
-        $cities = Barangay::select('id','name', 'zipcode')
-                    ->where('cityid','=',$request->cid)
-                    ->get()->toArray();
-        return response()->json(['data'=>$cities]);
     }
 }

@@ -50,7 +50,7 @@
                                 <h3>Private car</h3>
                                 <p><em>(Sedan, SUV, AUV or Jeep)</em></p>
                             </div>
-                            <div class="card-data"><strong><em>PHP </em>610.41</strong> <a href="/ctpl-order-page?VehicleTypeId=1" data-action="ga" data-ga-action="result" data-ga-label="/result/marketplace/ctpl" data-ga-product="MI_CTPL" class="btn btn-default btn-block btn-sm">Get Quote</a></div>
+                            <div class="card-data"><strong><em>PHP </em>610.41</strong> <a href="/ctpl-insurance/order?type=1" data-action="ga" data-ga-action="result" data-ga-label="/result/marketplace/ctpl" data-ga-product="MI_CTPL" class="btn btn-default btn-block btn-sm">Get Quote</a></div>
                         </section>
                         <section class="card">
                             <div class="card-info">
@@ -58,7 +58,7 @@
                                 <h3>Commercial vehicle</h3>
                                 <p><em>(taxi or light to medium trucks)</em></p>
                             </div>
-                            <div class="card-data"><strong><em>PHP </em>660.41</strong> <a href="/ctpl-order-page?VehicleTypeId=2" data-action="ga" data-ga-action="result" data-ga-label="/result/marketplace/ctpl" data-ga-product="MI_CTPL" class="btn btn-default btn-block btn-sm">Get Quote</a></div>
+                            <div class="card-data"><strong><em>PHP </em>660.41</strong> <a href="/ctpl-insurance/order?type=2" data-action="ga" data-ga-action="result" data-ga-label="/result/marketplace/ctpl" data-ga-product="MI_CTPL" class="btn btn-default btn-block btn-sm">Get Quote</a></div>
                         </section>
                         <section class="card">
                             <div class="card-info">
@@ -66,7 +66,7 @@
                                 <h3>Heavy vehicle</h3>
                                 <p><em>(heavy truck or private bus)</em></p>
                             </div>
-                            <div class="card-data"><strong><em>PHP </em>1,250.40</strong> <a href="/ctpl-order-page?VehicleTypeId=3" data-action="ga" data-ga-action="result" data-ga-label="/result/marketplace/ctpl" data-ga-product="MI_CTPL" class="btn btn-default btn-block btn-sm">Get Quote</a></div>
+                            <div class="card-data"><strong><em>PHP </em>1,250.40</strong> <a href="/ctpl-insurance/order?type=3" data-action="ga" data-ga-action="result" data-ga-label="/result/marketplace/ctpl" data-ga-product="MI_CTPL" class="btn btn-default btn-block btn-sm">Get Quote</a></div>
                         </section>
                     </div>
                 </fieldset>

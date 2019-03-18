@@ -117,4 +117,5 @@ class InquiryController extends Controller
         $inquiry = Inquiry::where('refno','=',$request->qid)->first();
         return view('vehicle.quote',['client'=>$client, 'inquiry'=>$inquiry]);
     }
+
 }

@@ -40,17 +40,15 @@ Route::get('/admin/export','ClientController@export');
 
 
 
-Route::get('/ctpl-insurance', function () {
-    return view('vehicle.ctpl');
-});
+Route::get('/ctpl-insurance', 'CTPLController@index');
+Route::get('/ctpl-insurance/inquiry', 'CTPLController@showInquireForm');
+Route::get('/ctpl-insurance/order', 'CTPLController@showOrderForm');
+Route::post('/ctpl-insurance/store', 'CTPLController@store');
 
-Route::get('/ctpl-insurance/inquiry', function(){
-    return view('vehicle.ctpl-inquiry');
-});
 
-Route::get('/ctpl-insurance/order', function(Request $request){
-    return view('vehicle.ctpl-order');
-});
+
+
+
 
 Route::get('/personal-accident-insurance', function(){
     return view('personalaccident');
@@ -82,6 +80,11 @@ Route::get('/test1', function(){
 
 Route::get('/test/ty', function(){
     return view('thankyou');
+});
+
+
+Route::get('/test/pay', function(){
+    return view('vehicle.ctpl-payment');
 });
 
 Route::get('/test/select', function(){

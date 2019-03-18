@@ -7,6 +7,11 @@
     <link href="{{ asset('css/css.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')
+    @php
+        $fee = App\Fee
+                    ::where('Name','=','CTPL')
+                    ->where('Type','=',$type)->first();
+    @endphp
     <nav class="breadcrumb">
         <ol>
             <li>
@@ -29,18 +34,41 @@
     </nav>
     <article class="article">
         <div class="content">
-            <form id="step-wizard-form" action="10b-canvas-marketplace-wizard-(login).html" method="post" novalidate="novalidate">
+            <form id="step-wizard-form" action="/ctpl-insurance/store" method="post" novalidate="novalidate">
+                <input type="hidden" name="Type" value="{{ $type }}">
+                {{ csrf_field() }}
                 <fieldset>
                     <div class="wizard-panel wizard-panel-inline">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 d-sm-none d-lg-block">
+                                <div class="wizard-widget wizard-card card">
+                                    <div class="header">Order summary</div>
+                                    <div class="content">
+                                        <ul class="card-details">
+                                            <li class="item">
+                                                <span>{{ $fee->description }}</span>
+                                                <em>CTPL Insurance</em>
+                                            </li>
+                                            <li class="summary">
+                                                <span>Total Price</span>
+                                                <strong">PHP {{ number_format($fee->amount,2,'.',',') }}</strong>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
                         <div class="wizard-section row" data-bind="">
-                            <div class="col-md-12 col-lg-9">
+                            <div class="col-md-12 col-lg-12">
                                 <h3>Vehicle details</h3>
                                 <p>Please describe your vehicle model and registration details.</p>
                                 <div class="form-section row">
                                     <div class="field col-sm-4 col-xs-6">
                                         <div class="form-group  ">
-                                            <label for="CTPLVehicleManufacturer">Manufacturer  </label>
-                                            <select class="select form-control plain" name="CTPLVehicleManufacturer" id="CTPLVehicleManufacturer" type="text" data-bind="value: $root.Model.Order.CTPLVehicleManufacturer, options: $root.Model.getManufacturerOptions(), optionsText: 'Text', optionsValue: 'Value', event: { click: $root.InputClick, change: $root.InputChange }">
+                                            <label for="Manufacturer">Manufacturer  </label>
+                                            <select class="select form-control plain" name="Manufacturer" id="Manufacturer" required>
                                                 <option value="">Please Select</option>
                                                 @foreach(App\Manufacturer::all() as $manufacturer)
                                                     <option value="{{ $manufacturer->id }}">{{ $manufacturer->name }}</option>
@@ -50,28 +78,28 @@
                                     </div>
                                     <div class="field col-sm-4 col-xs-6">
                                         <div class="form-group ">
-                                            <label for="CTPLVehicleModel">Model </label>
-                                            <input class="text form-control plain" name="CTPLVehicleModel" id="CTPLVehicleModel" type="text" data-bind="value: $root.Model.Order.CTPLVehicleModel, event: { click: $root.InputClick, change: $root.InputChange }">
+                                            <label for="Model">Model </label>
+                                            <input class="text form-control plain" name="Model" id="Model" type="text" required style="text-transform:uppercase">
                                         </div>
                                     </div>
                                     <div class="field col-sm-4 col-xs-12">
                                         <div class="form-group ">
-                                            <label for="CTPLVehicleSeries">Series </label>
-                                            <input class="text form-control plain" name="CTPLVehicleSeries" id="CTPLVehicleSeries" type="text" data-bind="value: $root.Model.Order.CTPLVehicleSeries, event: { click: $root.InputClick, change: $root.InputChange }">
+                                            <label for="Variant">Series </label>
+                                            <input class="text form-control plain" name="Variant" id="Variant" type="text" required style="text-transform:uppercase">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-section row">
                                     <div class="field col-sm-6 col-xs-12">
                                         <div class="form-group ">
-                                            <label for="CTPLVehicleManufacturerYear">Year </label>
-                                            <input class="text form-control plain" name="CTPLVehicleManufacturerYear" id="CTPLVehicleManufacturerYear" type="text" data-bind="value: $root.Model.Order.CTPLVehicleManufacturerYear, event: { click: $root.InputClick, change: $root.InputChange }">
+                                            <label for="Year">Year </label>
+                                            <input class="text form-control plain" name="Year" id="Year" type="text" required style="text-transform:uppercase">
                                         </div>
                                     </div>
                                     <div class="field col-sm-6 col-xs-12">
                                         <div class="form-group ">
-                                            <label for="CTPLVehicleColor">Color </label>
-                                            <input class="text form-control plain" name="CTPLVehicleColor" id="CTPLVehicleColor" type="text" data-bind="value: $root.Model.Order.CTPLVehicleColor, event: { click: $root.InputClick, change: $root.InputChange }">
+                                            <label for="Color">Color </label>
+                                            <input class="text form-control plain" name="Color" id="Color" type="text" required style="text-transform:uppercase">
                                         </div>
                                     </div>
                                 </div>
@@ -82,57 +110,36 @@
                                     </div>
                                     <div class="field col-xs-6">
                                         <div class="form-group ">
-                                            <label for="CTPLVehiclePlateConductionNumber">Plate Number  </label>
-                                            <input class="text form-control plain" name="CTPLVehiclePlateConductionNumber" id="CTPLVehiclePlateConductionNumber" type="text" data-bind="value: $root.Model.Order.CTPLVehiclePlateConductionNumber, event: { click: $root.InputClick, change: $root.InputChange }">
+                                            <label for="PlateNo">Plate Number  </label>
+                                            <input class="text form-control plain" name="PlateNo" id="PlateNo" type="text" required style="text-transform:uppercase">
                                         </div>
                                     </div>
                                     <div class="field col-xs-6">
                                         <div class="form-group ">
-                                            <label for="CTPLVehicleEngineNumber">Engine Number </label>
-                                            <input class="text form-control plain" name="CTPLVehicleEngineNumber" id="CTPLVehicleEngineNumber" type="text" data-bind="value: $root.Model.Order.CTPLVehicleEngineNumber, event: { click: $root.InputClick, change: $root.InputChange }">
+                                            <label for="Engine">Engine Number </label>
+                                            <input class="text form-control plain" name="Engine" id="Engine" type="text" required style="text-transform:uppercase">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-section row">
                                     <div class="field col-xs-6">
                                         <div class="form-group ">
-                                            <label for="CTPLVehicleChassisNumber">Chassis Number </label>
-                                            <input class="text form-control plain" name="CTPLVehicleChassisNumber" id="CTPLVehicleChassisNumber" type="text" data-bind="value: $root.Model.Order.CTPLVehicleChassisNumber, event: { click: $root.InputClick, change: $root.InputChange }">
+                                            <label for="Chassis">Chassis Number </label>
+                                            <input class="text form-control plain" name="Chassis" id="Chassis" type="text" required style="text-transform:uppercase">
                                         </div>
                                     </div>
                                     <div class="field col-xs-6">
                                         <div class="form-group ">
-                                            <label for="CTPLVehicleMVFileNumber">MV File Number </label>
-                                            <input class="text form-control plain" name="CTPLVehicleMVFileNumber" id="CTPLVehicleMVFileNumber" type="text" data-bind="value: $root.Model.Order.CTPLVehicleMVFileNumber, event: { click: $root.InputClick, change: $root.InputChange }">
+                                            <label for="MVFileNumber">MV File Number </label>
+                                            <input class="text form-control plain" name="MVFileNumber" id="MVFileNumber" required type="text" style="text-transform:uppercase">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 col-lg-3 d-sm-none d-lg-block">
-                                <div class="wizard-widget wizard-cart cart">
-                                    <div class="header">Order summary</div>
-                                    <div class="content">
-                                        <ul class="cart-details">
-                                            <!-- ko if: $root.Model.Data.VehicleTypeId() > 0 -->
-                                            <li class="item">
-                                                <span data-bind="text:$root.Model.DisplayData.CTPLVehicleType()">Truck</span>
-                                                <strong data-bind="text:$root.Model.DisplayData.TotalAmount()">1250.4</strong>
-                                                <em>CTPL Insurance</em>
-                                            </li>
-                                            <!-- /ko -->
-                                            <li class="summary">
-                                                <span>Total Price</span>
-                                                <strong data-bind="text:$root.Model.DisplayData.DisplayedTotalAmount()">PHP 1,250.40</strong>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
-                </fieldset>
-                <fieldset>
-                    <div class="wizard-panel wizard-panel-inline">
+                    <div>
                         <div class="wizard-section row" data-bind="">
                             <div class="col-md-12">
                                 <h3>Contact details</h3>
@@ -141,19 +148,19 @@
                                     <div class="field col-sm-4 col-xs-6">
                                         <div class="form-group ">
                                             <label for="FirstName">First Name </label>
-                                            <input class="text form-control plain" name="FirstName" id="FirstName" type="text" data-bind="value: $root.Model.Order.FirstName, event: { click: $root.InputClick, change: $root.InputChange }">
+                                            <input class="text form-control plain" name="FirstName" id="FirstName" type="text" required style="text-transform:uppercase">
                                         </div>
                                     </div>
                                     <div class="field col-sm-4 col-xs-6">
                                         <div class="form-group ">
                                             <label for="MiddleName">Middle Name </label>
-                                            <input class="text form-control plain" name="MiddleName" id="MiddleName" type="text" data-bind="value: $root.Model.Order.MiddleName, event: { click: $root.InputClick, change: $root.InputChange }">
+                                            <input class="text form-control plain" name="MiddleName" id="MiddleName" type="text" style="text-transform:uppercase">
                                         </div>
                                     </div>
                                     <div class="field col-sm-4 col-xs-12">
                                         <div class="form-group ">
                                             <label for="LastName">Last Name </label>
-                                            <input class="text form-control plain" name="LastName" id="LastName" type="text" data-bind="value: $root.Model.Order.LastName, event: { click: $root.InputClick, change: $root.InputChange }">
+                                            <input class="text form-control plain" name="LastName" id="LastName" type="text" required style="text-transform:uppercase">
                                         </div>
                                     </div>
                                 </div>
@@ -162,8 +169,8 @@
                                         <div class="form-group ">
                                             <label for="Email">Email </label>
                                             <div class="input-group">
-                                                <span class="input-group-addon"><i class="icon i-display-mail i-2x"></i></span>
-                                                <input type="email" class="text form-control plain" name="Email" id="Email" data-bind="value: $root.Model.Order.Email, event: { click: $root.InputClick, change: $root.InputChange }">
+                                                <span class="input-group-addon"><i class="icon i-display-mail"></i></span>
+                                                <input type="email" class="text form-control plain" name="Email" id="Email" required style="text-transform:uppercase">
                                             </div>
                                         </div>
                                     </div>
@@ -172,7 +179,7 @@
                                             <label for="Mobile1Number">Phone number </label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">+63</span>
-                                                <input class="text form-control plain" name="Mobile1Number" id="Mobile1Number" type="tel" data-bind="value: $root.Model.Order.Mobile1Number, event: { click: $root.InputClick, change: $root.InputChange }">
+                                                <input class="text form-control plain" name="Mobile1Number" id="Mobile1Number" required type="tel" style="text-transform:uppercase">
                                             </div>
                                         </div>
                                     </div>
@@ -185,78 +192,72 @@
                                     <div class="field col-xs-12">
                                         <div class="form-group ">
                                             <label for="StreetLine1">Address and street name </label>
-                                            <input class="text form-control plain" name="StreetLine1" id="StreetLine1" type="text" data-bind="value: $root.Model.Order.StreetLine1, event: { click: $root.InputClick, change: $root.InputChange }">
+                                            <input class="text form-control plain" name="StreetLine1" id="StreetLine1" required type="text" style="text-transform:uppercase">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-section row">
-                                    <!-- ko if: true -->
                                     <div class="field col-xs-4">
                                         <div class="form-group  ">
                                             <label for="ProvinceId">Province </label>
-                                            <select class="select form-control plain" name="ProvinceId" id="ProvinceId" type="text" data-bind="value: $root.Model.Order.ProvinceId ,options: $root.Model.ProvinceList, optionsText: 'DisplayedName', optionsValue: 'ProvinceId', event: { click: $root.InputClick, change: function() { $root.Model.getRegionOptions($root.Model.Order.ProvinceId()) }   }">
-                                                <option value="-1">Please Select...</option>
+                                            <select class="select form-control plain" name="ProvinceId" id="ProvinceId" required type="text" style="text-transform:uppercase">
+                                                <option value="-1">- Please Select -</option>
                                                 @foreach(App\Province::all()->sortBy('sortval') as $entry)
                                                     <option value="{{ $entry->id }}">{{ $entry->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
-                                    <!-- /ko -->
-                                    <!-- ko if: true -->
                                     <div class="field col-xs-4">
                                         <div class="form-group  ">
                                             <label for="CityId">City </label>
-                                            <select class="select form-control plain" name="CityId" id="CityId" type="text" data-bind="value: $root.Model.Order.CityId ,options: $root.Model.RegionList, optionsText: 'DisplayedName', optionsValue: 'CityId', event: { click: $root.InputClick, change: function() { $root.Model.getDistrictOptions($root.Model.Order.CityId()) }}">
-                                                <option value="-1">Please Select...</option>
+                                            <select class="select form-control plain" name="CityId" id="CityId" type="text" required style="text-transform:uppercase">
+                                                <option value="-1">- Please Select -</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <!-- /ko -->
                                 </div>
                                 <div class="form-section row">
-                                    <!-- ko if: true -->
                                     <div class="field col-xs-4">
                                         <div class="form-group  ">
                                             <label for="BarangayId">Barangay </label>
-                                            <select class="select form-control plain" name="BarangayId" id="BarangayId" type="text" data-bind="value: $root.Model.Order.BarangayId, options: $root.Model.DistrictList, optionsText: 'DisplayedName', optionsValue: 'BarangayId', event: { click: $root.InputClick,  change: function() { $root.Model.setDistrictCode($root.Model.Order.BarangayId()) } }">
-                                                <option value="-1">Please Select...</option>
+                                            <select class="select form-control plain" name="BarangayId" id="BarangayId" type="text" style="text-transform:uppercase">
+                                                <option value="-1">- Please Select -</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <!-- /ko -->
-                                    <!-- ko if: true -->
                                     <div class="field col-xs-4">
                                         <div class="form-group ">
-                                            <label for="AreaName">Village </label>
-                                            <input class="text form-control plain" name="AreaName" id="AreaName" type="text" data-bind="value: $root.Model.Order.AreaName, event: { click: $root.InputClick, change: $root.InputChange }">
+                                            <label for="Village">Village </label>
+                                            <input class="text form-control plain" name="Village" id="Village" type="text" style="text-transform:uppercase">
                                         </div>
                                     </div>
-                                    <!-- /ko -->
-                                    <!-- ko if: true -->
                                     <div class="field col-xs-4">
                                         <div class="form-group ">
-                                            <label for="AreaCode">Zip Code </label>
-                                            <input class="text form-control plain" name="AreaCode" id="AreaCode" type="text" data-bind="value: $root.Model.Order.AreaCode, event: { click: $root.InputClick, change: $root.InputChange }, enable: false" disabled="">
+                                            <label for="ZipCode">Zip Code </label>
+                                            <input class="text form-control plain" name="ZipCode" id="ZipCode" type="text"style="text-transform:uppercase" readonly>
                                         </div>
                                     </div>
-                                    <!-- /ko -->
                                 </div>
-                                <!-- ko if:  --><!-- /ko -->
-                                <!-- ko if: true -->
                                 <hr>
                                 <div class="form-group m-b-2x">
                                     <label>Consent for storing personal data:</label>
                                     <div class="form-terms">
                                         <ul>
-                                            I allow eCompareMo to collect, store and process my personal information - including but not limited to my name, address, phone number, email, etc., as supplied for transactions on this website. Transactions may include cookie placement, personalized offers, enrollment in its newsletter and others. The use and processing of my information shall be in accordance with applicable laws and eCompareMo’s <a href="https://www.ecomparemo.com/terms-conditions">Terms and Conditions</a> and <a href="https://www.ecomparemo.com/privacy-policy">Privacy Policy</a>, which I confirm to have read and understood.
+                                            I allow eCompaMore to collect, store and process my personal information - including but not limited to my name, address, phone number, email, etc., as supplied for transactions on this website. Transactions may include cookie placement, personalized offers, enrollment in its newsletter and others. The use and processing of my information shall be in accordance with applicable laws and eCompaMore’s <a href="https://www.eCompaMore.com/terms-conditions">Terms and Conditions</a> and <a href="https://www.eCompaMore.com/privacy-policy">Privacy Policy</a>, which I confirm to have read and understood.
                                         </ul>
                                     </div>
                                     <div class="checkbox checkbox-stack plain field">
-                                        <label><input type="checkbox" data-bind="checked: $root.Model.Order.hasConsent, event: {  click: $root.InputClick, change: $root.InputChange }" id="hasConsent" name="hasConsent" value="true"> I agree to the terms above.</label>
+                                        <label><input type="checkbox" id="hasConsent" name="hasConsent" value="true" required> I agree to the terms above.</label>
                                     </div>
                                 </div>
                                 <!-- /ko -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+
+                                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -313,7 +314,7 @@
             });
 
             $('#CityId').on('change', function(){
-                var cityid = $(this).val();
+                var cityid = $(this).val();BarangayId
 
                 var $brgy = $("#BarangayId");
                 $brgy.empty();
@@ -328,6 +329,7 @@
                     data: { cid: cityid }
                 }).done(function( msg ) {
                     $.each(msg.data, function(i, item){
+                        $('#ZipCode').val(item.zipcode);
                         $brgy.append($('<option>',{
                             value: item.id,
                             text: item.name
