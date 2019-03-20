@@ -44,6 +44,7 @@ Route::get('/test/admin/vehicle-insurance', 'PageController@vehicle');
 Route::get('/test/admin/vehicle-insurance/data', 'InquiryController@data');
 
 Route::get('/test/admin/ctpl-insurance', 'PageController@ctpl');
+Route::get('/test/admin/ctpl-insurance/data', 'CTPLController@data');
 Route::get('/test/admin/personal-accident-insurance', 'PageController@pa');
 
 

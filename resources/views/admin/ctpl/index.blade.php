@@ -23,7 +23,6 @@
                            <tr>
                               <th>Client</th>
                               <th>Vehicle</th>
-                              <th>Call Time</th>
                               <th>Date Added</th>
                               <th>Contacted</th>
                               <th>&nbsp;</th>
@@ -33,7 +32,6 @@
                             <tr>
                                 <th>Client</th>
                                 <th>Vehicle</th>
-                                <th>Call Time</th>
                                 <th>Date Added</th>
                                 <th>Contacted</th>
                                 <th class="sorting">&nbsp;</th>
@@ -69,15 +67,14 @@ $('#vehicleInsuranceTable').DataTable( {
     serverSide: false,
     processing: true,
     searching: true,
-    ajax: '/test/admin/vehicle-insurance/data',
+    ajax: '/test/admin/ctpl-insurance/data',
     dataSrc: 'data',
     columns: [
         { data:"Client" },
         { data:"Vehicle" },
-        { data:"CallTime" },
         { data:"DateAdded" },
         { data:"Contacted", orderable:false },
-        { data:null, orderable:false }
+        { data:null, orderable:false, class:'text-center' }
 
     ],
     columnDefs: [
@@ -85,7 +82,7 @@ $('#vehicleInsuranceTable').DataTable( {
             render: function ( data, type, row ) {
                 return '<a href="/test/admin/vehicle-insurance/view/'+data.ID+'" class="btn btn-info btn-link btn-icon btn-sm like"><i class="fa fa-search"></i></a>';
             },
-            targets: 5
+            targets: 4
 
         }
     ],

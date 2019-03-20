@@ -30,6 +30,13 @@ class CTPL extends Model
         'zipcode'
     ];
 
+    public function getClientInfo() {
+        return $this->belongsTo('App\Client','client','id')->first();
+    }
+
+    public function getManufacturer() {
+        return $this->hasOne('App\Manufacturer','id','manufacturer')->first();
+    }
 
 
     public function generateReferenceNumber() {

@@ -75,6 +75,7 @@ class CTPLController extends Controller
         $ctpl->brgy = $request->BarangayId;
         $ctpl->village = $request->Village;
         $ctpl->zipcode = $request->ZipCode;
+        $ctpl->generateReferenceNumber();
         $ctpl->save();
 
         return redirect()->to('');
@@ -123,5 +124,24 @@ class CTPLController extends Controller
     public function destroy(CTPL $cTPL)
     {
         //
+    }
+
+
+    public function data(Request $request) {
+        $data = array();
+        $iniquiries = CTPL::all();
+        foreach($iniquiries as $inquiry) {
+            $client = $inquiry->getClientInfo();
+            $manufacturer = $inquiry->getManufacturer();
+            $entry = array(
+                'ID' => $inquiry->id,
+                'Client' => $client->getName(),
+                'Vehicle' => sprintf('%s %s %s %s %s',$inquiry->year, $manufacturer->name, $inquiry->model, $inquiry->variant, $inquiry->color),
+                'DateAdded' => $inquiry->created_at->format("j/m/Y"),
+                'Contacted' => $client->contacted?"YES":"NO"
+            );
+            array_push($data, $entry);
+        }
+        return response()->json(['aaData'=>$data]);
     }
 }
