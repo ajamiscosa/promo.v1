@@ -115,7 +115,10 @@
                     </tbody>
                 </table>
             </div>
-		</div>
+        </div>
+
+
+
 		{{-- <aside class="sidebar">
 			<div class="widget help-desk-widget">
 				<h4>Need Help?</h4>
