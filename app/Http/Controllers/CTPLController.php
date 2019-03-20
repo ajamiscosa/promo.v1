@@ -44,18 +44,22 @@ class CTPLController extends Controller
      */
     public function store(Request $request)
     {
-        $client = new Client();
-        $client->lastname = ucwords($request->LastName);
-        $client->firstname = ucwords($request->FirstName);
-        $client->middlename = ucwords($request->MiddleName);
-        $client->email = $request->Email;
-        $client->mobilenumber = $request->Mobile1Number;
-        $client->phonenumber = 'N/A';
-        $client-Save();
+        $person = new Client();
+        $person->lastname = ucwords($request->LastName);
+        $person->firstname = ucwords($request->FirstName);
+        $person->middlename = ucwords($request->MiddleName);
+        $person->email = $request->Email;
+        $person->mobilenumber = $request->Mobile1Number;
+        $person->phonenumber = 'N/A';
+        $person->title = 'Mr./Ms.';
+        $person->calltime = 0;
+        $person->customcalltime = '';
+        $person->contacted = false;
+        $person->save();
 
         $ctpl = new CTPL();
         $ctpl->type = $request->Type;
-        $ctpl->client = $client->ID;
+        $ctpl->client = $person->id;
         $ctpl->plate = $request->PlateNo;
         $ctpl->engine = $request->Engine;
         $ctpl->chassis = $request->Chassis;

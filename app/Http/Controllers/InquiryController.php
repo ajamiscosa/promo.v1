@@ -118,4 +118,21 @@ class InquiryController extends Controller
         return view('vehicle.quote',['client'=>$client, 'inquiry'=>$inquiry]);
     }
 
+    public function data(){
+        $data = array();
+        $iniquiries = Inquiry::all();
+        foreach($iniquiries as $inquiry) {
+            $client = $inquiry->getClientInfo();
+            $entry = array(
+                'ID' => $inquiry->id,
+                'Client' => $client->getName(),
+                'Vehicle' => $inquiry->getVehicleInfo(),
+                'CallTime' => $client->getPreferredCallTime()->description,
+                'DateAdded' => $inquiry->created_at->format("j/m/Y"),
+                'Contacted' => $client->contacted?"YES":"NO"
+            );
+            array_push($data, $entry);
+        }
+        return response()->json(['aaData'=>$data]);
+    }
 }

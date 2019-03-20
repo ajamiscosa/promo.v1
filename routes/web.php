@@ -35,8 +35,31 @@ Route::get('/vehicle-insurance/quote', 'InquiryController@quote');
 Route::get('/login', 'UserController@showLoginForm')->name('login');
 Route::post('/login', 'UserController@doLogin');
 
-Route::get('/admin','UserController@dashboard');
-Route::get('/admin/export','ClientController@export');
+Route::get('/dashboard','UserController@dashboard');
+Route::get('/dashboard/export','ClientController@export');
+
+
+Route::get('/test/admin', 'PageController@dashboard');
+Route::get('/test/admin/vehicle-insurance', 'PageController@vehicle');
+Route::get('/test/admin/vehicle-insurance/data', 'InquiryController@data');
+
+Route::get('/test/admin/ctpl-insurance', 'PageController@ctpl');
+Route::get('/test/admin/personal-accident-insurance', 'PageController@pa');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
