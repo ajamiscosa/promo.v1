@@ -67,7 +67,7 @@ $('#vehicleInsuranceTable').DataTable( {
     serverSide: false,
     processing: true,
     searching: true,
-    ajax: '/test/admin/ctpl-insurance/data',
+    ajax: '/dashboard/ctpl-insurance/data',
     dataSrc: 'data',
     columns: [
         { data:"Client" },
@@ -80,7 +80,7 @@ $('#vehicleInsuranceTable').DataTable( {
     columnDefs: [
         {
             render: function ( data, type, row ) {
-                return '<a href="/test/admin/vehicle-insurance/view/'+data.ID+'" class="btn btn-info btn-link btn-icon btn-sm like"><i class="fa fa-search"></i></a>';
+                return '<a href="/dashboard/vehicle-insurance/view/'+data.ID+'" class="btn btn-info btn-link btn-icon btn-sm like"><i class="fa fa-search"></i></a>';
             },
             targets: 4
 

@@ -9,7 +9,14 @@
    <div class="col-lg-12">
       <div class="card">
          <div class="card-header">
-            <h4>Vehicle Insurance</h4>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1>Vehicle Insurance</h1>
+                </div>
+                <div class="col-lg-6">
+                    <a class="btn btn-ghost-default pull-right" href="/dashboard/vehicle-insurance/export" target="_blank">Export Contact List</a>
+                </div>
+            </div>
          </div>
          <div class="card-body">
             <div class="toolbar">
@@ -69,7 +76,7 @@ $('#vehicleInsuranceTable').DataTable( {
     serverSide: false,
     processing: true,
     searching: true,
-    ajax: '/test/admin/vehicle-insurance/data',
+    ajax: '/dashboard/vehicle-insurance/data',
     dataSrc: 'data',
     columns: [
         { data:"Client" },
@@ -83,7 +90,7 @@ $('#vehicleInsuranceTable').DataTable( {
     columnDefs: [
         {
             render: function ( data, type, row ) {
-                return '<a href="/test/admin/vehicle-insurance/view/'+data.ID+'" class="btn btn-info btn-link btn-icon btn-sm like"><i class="fa fa-search"></i></a>';
+                return '<a href="/dashboard/vehicle-insurance/view/'+data.ID+'" class="btn btn-info btn-link btn-icon btn-sm like"><i class="fa fa-search"></i></a>';
             },
             targets: 5
 

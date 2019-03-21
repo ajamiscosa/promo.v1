@@ -30,22 +30,23 @@ Route::get('/vehicle-insurance', function () {
 Route::post('/vehicle-insurance/inquiry', 'InquiryController@vehicleInquiry');
 Route::post('/vehicle-insurance/inquiry/store', 'InquiryController@store');
 Route::get('/vehicle-insurance/quote', 'InquiryController@quote');
+Route::post('/vehicle-insurance/quote/get', 'InquiryController@getquote');
 
 
 Route::get('/login', 'UserController@showLoginForm')->name('login');
 Route::post('/login', 'UserController@doLogin');
 
-Route::get('/dashboard','UserController@dashboard');
-Route::get('/dashboard/export','ClientController@export');
+// Route::get('/dashboard','UserController@dashboard');
+Route::get('/dashboard/vehicle-insurance/export','ClientController@export');
 
 
-Route::get('/test/admin', 'PageController@dashboard');
-Route::get('/test/admin/vehicle-insurance', 'PageController@vehicle');
-Route::get('/test/admin/vehicle-insurance/data', 'InquiryController@data');
+Route::get('/dashboard', 'PageController@dashboard');
+Route::get('/dashboard/vehicle-insurance', 'PageController@vehicle');
+Route::get('/dashboard/vehicle-insurance/data', 'InquiryController@data');
 
-Route::get('/test/admin/ctpl-insurance', 'PageController@ctpl');
-Route::get('/test/admin/ctpl-insurance/data', 'CTPLController@data');
-Route::get('/test/admin/personal-accident-insurance', 'PageController@pa');
+Route::get('/dashboard/ctpl-insurance', 'PageController@ctpl');
+Route::get('/dashboard/ctpl-insurance/data', 'CTPLController@data');
+Route::get('/dashboard/personal-accident-insurance', 'PageController@pa');
 
 
 

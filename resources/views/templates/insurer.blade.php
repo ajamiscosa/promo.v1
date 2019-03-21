@@ -15,29 +15,34 @@
     <div class="result-pinned" style="display: none;">Featured Product</div>
     <div class="result-item-wrap">
         <div class="result-content">
+                <form action="/vehicle-insurance/quote/get" method="POST" style="">
             <div class="result-content-top clearfix">
-                <div class="result-name">
-                    {{-- <div class="result-selector">
-                        <input type="checkbox" class="comparisonCheckbox">
-                    </div> --}}
+                <div class="result-name" style="display: -webkit-flex; -webkit-align-items: center; font-size: 1.2em;">
                     <strong>{{ $data->name }}</strong> <small></small>
                 </div>
-                <div class="result-buttons">
+                <div class="result-buttons pb-0 mb-0">
                     <div class="button-row">
-                        <a class="btn btn-default btn-block" href="/">Get Quote</a>
+                            {{ csrf_field() }}
+                            <input type="hidden" name="InsuredValue" value="{{ $price }}">
+                            <input type="hidden" name="BodilyInjury" value="{{ $_bi->id }}">
+                            <input type="hidden" name="PropertyDamage" value="{{ $_pd->id }}">
+                            <input type="hidden" name="Premium" value="{{ $totalPremium }}">
+                            <input type="hidden" name="Agency" value="{{ $data->id }}">
+                            <button type="submit" class="btn btn-default btn-block" style="margin-bottom: 0px !important;">Get Quote</button>
                     </div>
                     <div class="button-row">
-                        <a href="javascript:;" class="btn btn-ghost-default btn-block result-contact">
+                        <a href="javascript:;" class="btn btn-ghost-default btn-block result-contact"  style="margin-bottom: 0px !important;">
                         Contact Me
                         </a>
                     </div>
                 </div>
             </div>
+        </form>
             <div class="result-information p-b-2x to-normal-size">
                 <div class="result-features row">
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                        <div class="img-thumbnail m-b-1x">
-                        <img class="img-responsive" src='{{ asset("insurer/{$data->imgpath}") }}' alt="{{ $data->name }}">
+                        <div class=" m-b-2x" style="min-height: 60px; max-height: 60px;">
+                        <img style="object-fit: scale-down; max-width: 260px; max-height: 60px;" src='{{ asset("insurer/{$data->imgpath}") }}' alt="{{ $data->name }}">
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
@@ -83,10 +88,13 @@
                     </div>
                 </div>
                 <div class="result-features result-border-top p-t-2x hidden-xs">
+                    @php
+                        $features = json_decode($data->features);
+                    @endphp
                     <ul class="tick-list o80 f80">
-                        <li>Free 24-hour roadside assist program</li>
-                        <li>Accepts up to 10-year old cars</li>
-                        <li>Free Auto Passenger Accident Insurance of PHP250,000.00</li>
+                        @foreach ($features as $feature)
+                            <li>{{ $feature }}</li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -142,7 +150,7 @@
                                     <tr>
                                         <th rowspan="5">Additional coverages</th>
                                         <td colspan="2">Voluntary Third Party Liability - Bodily Injury</td>
-                                        
+
                                         <td>Php. {{ number_format($_bi->addon,2,'.',',') }}</td>
                                         <td>Php {{ number_format($bi,2,'.',',') }}</td>
                                         <td> </td>

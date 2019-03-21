@@ -65,19 +65,19 @@
                 <div class="collapse" id="transactions" style="">
                     <ul class="nav">
                         <li id="vehicle-insurance">
-                            <a href="/test/admin/vehicle-insurance" id="vehicle-insurance">
+                            <a href="/dashboard/vehicle-insurance" id="vehicle-insurance">
                             <span class="sidebar-mini-icon">V</span>
                             <span class="sidebar-normal"> Vehilcle Insurance </span>
                             </a>
                         </li>
                         <li id="ctpl-insurance">
-                            <a href="/test/admin/ctpl-insurance">
+                            <a href="/dashboard/ctpl-insurance">
                             <span class="sidebar-mini-icon">C</span>
                             <span class="sidebar-normal"> CTPL Insurance </span>
                             </a>
                         </li>
                         <li id="personal-accident-insurance">
-                            <a href="/test/admin/personal-accident-insurance">
+                            <a href="/dashboard/personal-accident-insurance">
                             <span class="sidebar-mini-icon">P</span>
                             <span class="sidebar-normal"> Personal Accident Insurance </span>
                             </a>
@@ -86,7 +86,7 @@
                 </div>
             </li>
             <li>
-                <a href="/test/accounts">
+                <a href="/dashboard/accounts">
                     <i class="nc-icon nc-circle-10"></i>
                     <p>User Accounts</p>
                 </a>

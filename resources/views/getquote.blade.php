@@ -1,11 +1,18 @@
 @extends('app')
+@section('title','Payment')
 @section('styles')
 <style>
-    .cxcx {
-        display: inline-block;
-        *display: inline;
-        zoom: 1;
-        vertical-align: middle;
+    .shittycenter {
+        display: -webkit-flex;
+        -webkit-align-items: center;
+    }
+
+    td{
+        color: black;
+    }
+
+    .insurer-image {
+        object-fit: scale-down; width: 100%; max-height: 95px;"
     }
 </style>
 @endsection
@@ -14,12 +21,12 @@
 	<article class="article">
 		<div class="content">
             <div class="table table-striped">
-                <table style="width: 100%;">
+                <table style="width: 100%; color: #000;">
                     <thead>
-                        <tr style="border: 1px solid black;">
-                            <th width="35%">&nbsp;COVERAGE</th>
-                            <th>LIMIT OF LIABILITY</th>
-                            <th width="50%" class="text-center">PREMIUM</th>
+                        <tr style="border: 1px solid black; background-color: #E26A0A;">
+                            <th width="35%">&nbsp;<strong>COVERAGE</strong></th>
+                            <th><strong>LIMIT OF LIABILITY</strong></th>
+                            <th width="50%" class="text-center"><strong>PREMIUM</strong></th>
                         </tr>
                     </thead>
                     <tbody style="border: 1px solid black;">
@@ -27,36 +34,44 @@
                             <td width="35%">&nbsp;ACTS OF GOD</td>
                             <td width="15%">Php</td>
                             <td rowspan="2" style="border: 1px solid black;">
-                                <div class="row">
-                                    <div class="col-lg-7 cxcx">&emsp;<strong>PREMIUM WITH ACTS OF GOD</strong></div>
-                                    <div class="col-lg-5 text-right"><strong style="color: red; font-size: 1.25em">7,403.06</strong>&nbsp;&nbsp;&nbsp;</div>
+                                <div class="row" style="display: flex;align-items: center;">
+                                    <div class="col-lg-12 shittycenter">
+                                        <div class="col-lg-7">
+                                            <div><strong>PREMIUM WITH ACTS OF GOD</strong></div>
+                                        </div>
+                                        <div class="col-lg-5 text-right"><strong style="color: red; font-size: 1.25em">{{ number_format($data->Premium,2,'.',',') }}</strong>&nbsp;&nbsp;&nbsp;</div>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td width="35%">&nbsp;OWN DAMAGE</td>
-                            <td width="15%" class="text-right"><strong>200,000.00</strong>&nbsp;&nbsp;&nbsp;</td>
+                            <td width="15%" class="text-right"><strong>{{ number_format($data->InsuredValue,2,'.',',') }}</strong>&nbsp;&nbsp;&nbsp;</td>
                         </tr>
                         <tr>
                             <td width="35%">&nbsp;THEFT</td>
-                            <td width="15%" class="text-right"><strong>200,000.00</strong>&nbsp;&nbsp;&nbsp;</td>
+                            <td width="15%" class="text-right"><strong>{{ number_format($data->InsuredValue,2,'.',',') }}</strong>&nbsp;&nbsp;&nbsp;</td>
                             <td rowspan="4" style="border: 1px solid black;">
                                 <div class="row">
-
+                                    @php
+                                        $path = $data->Agency->imgpath;
+                                        $path = "insurer/".$path;
+                                    @endphp
+                                    <img class="insurer-image" src='{{ asset($path) }}'>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td width="35%">&nbsp;EXCESS BODILY INJURY</td>
-                            <td width="15%" class="text-right"><strong>200,000.00</strong>&nbsp;&nbsp;&nbsp;</td>
+                        <td width="15%" class="text-right"><strong>{{ number_format($data->BodilyInjury->coverage,2,'.',',') }}</strong>&nbsp;&nbsp;&nbsp;</td>
                         </tr>
                         <tr>
                             <td width="35%">&nbsp;PROPERTY DAMAGE</td>
-                            <td width="15%" class="text-right"><strong>200,000.00</strong>&nbsp;&nbsp;&nbsp;</td>
+                            <td width="15%" class="text-right"><strong>{{ number_format($data->PropertyDamage->coverage,2,'.',',') }}</strong>&nbsp;&nbsp;&nbsp;</td>
                         </tr>
                         <tr style="border-bottom: 1px solid black;">
                             <td width="35%">&nbsp;PERSONAL ACCIDENT</td>
-                            <td width="15%" class="text-right"><strong>200,000.00</strong>&nbsp;&nbsp;&nbsp;</td>
+                            <td width="15%" class="text-right"><strong>250,000.00</strong>&nbsp;&nbsp;&nbsp;</td>
                         </tr>
 
                         <tr>
@@ -85,24 +100,24 @@
                         <tr>
                             <td colspan="2" style="border: 1px solid black;" class="text-center"><strong>PAYMENT OPTIONS</strong></td>
                             <td rowspan="4" style="border: 1px solid black;">
-                                &nbsp;* Free Delivery of Insurance policy<br/>
-                                &nbsp;* Free Towing Services<br/>
-                                &nbsp;* Pay in 6 easy installments at ZERO INTEREST
+                                @foreach(json_decode($data->Agency->features) as $entry)
+                                &nbsp;* {{ $entry }}<br/>
+                                @endforeach
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">&emsp;&emsp;&emsp;SEDAN</div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong style="color: red;">P2000</strong></div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">&emsp;&emsp;&emsp;3 Mos.:</div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong style="color: red;">{{ number_format($data->Premium / 3,2,'.',',') }}</strong></div>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">&emsp;&emsp;&emsp;SUV</div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong style="color: red;">P2000</strong></div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">&emsp;&emsp;&emsp;6 Mos.:</div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><strong style="color: red;">{{ number_format($data->Premium / 6,2,'.',',') }}</strong></div>
                                 </div>
                             </td>
                         </tr>
@@ -111,9 +126,20 @@
                                 Pls. Make Cheques Payable To: CONNEXT INSURANCE AGENCY
                             </td>
                         </tr>
+                        <tr>
+                            <td colspan="3" class="text-center" style="border: 1px solid black; background-color: #FBBF04;">
+                                <strong>CONNEXT INSURANCE AGENCY</strong>
+                            </td>
+                        </tr>
 
                     </tbody>
                 </table>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <a href="" role="button" class="btn btn-primary btn-block">Pay Now</a>
+                </div>
             </div>
         </div>
 

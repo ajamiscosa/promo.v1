@@ -8,6 +8,10 @@ use App\Brand;
 use Symfony\Component\HttpKernel\Client;
 use App\Client as AppClient;
 use App\Manufacturer;
+use App\Classes\DTO;
+use App\BodilyInjury;
+use App\PropertyDamage;
+use App\Insurer;
 
 class InquiryController extends Controller
 {
@@ -134,5 +138,16 @@ class InquiryController extends Controller
             array_push($data, $entry);
         }
         return response()->json(['aaData'=>$data]);
+    }
+
+
+    public function getquote(Request $request) {
+        $dto = new DTO();
+        $dto->Premium = $request->Premium;
+        $dto->InsuredValue = $request->InsuredValue;
+        $dto->BodilyInjury = BodilyInjury::find($request->BodilyInjury);
+        $dto->PropertyDamage = PropertyDamage::find($request->PropertyDamage);
+        $dto->Agency = Insurer::find($request->Agency);
+        return view('getquote', ['data'=>$dto]);
     }
 }
