@@ -2,20 +2,31 @@
     $_bi = App\BodilyInjury::where('coverage','=',$bi)->first();
     $_pd = App\PropertyDamage::where('coverage','=',$pd)->first();
 
+
     $lossdmg = $price * $rate;
-    $aogprice = $price * $aograte;
+    $aogprice = $price * 0.003;
     $premium = $lossdmg + $aogprice + $_bi->addon + $_pd->addon;
+
     $documentStamp = $premium * 0.125;
     $evat = $premium * 0.12;
     $tax = $premium * 0.002;
     $govtDues = $documentStamp + $evat + $tax;
+
     $totalPremium = $premium + $govtDues;
+
+    $url = request()->session()->get('_previous')['url'];
+    if(strpos($url,'truck')===false) {
+        $url = "/vehicle-insurance";
+    }
+    else {
+        $url = "/truck-insurance";
+    }
 @endphp
 <div class="result-item result-row">
     <div class="result-pinned" style="display: none;">Featured Product</div>
     <div class="result-item-wrap">
         <div class="result-content">
-                <form action="/vehicle-insurance/quote/get" method="POST" style="">
+        <form action="{{ $url }}/quote/get" method="POST" style="">
             <div class="result-content-top clearfix">
                 <div class="result-name" style="display: -webkit-flex; -webkit-align-items: center; font-size: 1.2em;">
                     <strong>{{ $data->name }}</strong> <small></small>
@@ -124,7 +135,7 @@
                                     <tr>
                                         <th>Main Coverage</th>
                                         <td colspan="2">Comprehensive</td>
-                                        <td>Php. {{ number_format($price * 0.01,2,'.',',') }}</td>
+                                        <td>Php. {{ number_format($price * $rate,2,'.',',') }}</td>
                                         <td>Php {{ number_format($price,2,'.',',') }}  </td>
                                         <td>Php {{ number_format($insurer->deductiblefee,2,'.',',') }}</td>
                                     </tr>

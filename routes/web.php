@@ -27,10 +27,22 @@ Route::get('/vehicle-insurance', function () {
     return view('vehicle');
 });
 
+Route::get('/truck-insurance', function () {
+    return view('truck');
+});
+
 Route::post('/vehicle-insurance/inquiry', 'InquiryController@vehicleInquiry');
 Route::post('/vehicle-insurance/inquiry/store', 'InquiryController@store');
 Route::get('/vehicle-insurance/quote', 'InquiryController@quote');
 Route::post('/vehicle-insurance/quote/get', 'InquiryController@getquote');
+
+Route::post('/truck-insurance/inquiry','InquiryController@truckInquiry');
+Route::post('/truck-insurance/inquiry/store', 'InquiryController@store');
+Route::get('/truck-insurance/quote', 'InquiryController@truckQuote');
+Route::post('/truck-insurance/quote/get', 'InquiryController@getTruckQuote');
+
+
+
 
 
 Route::get('/login', 'UserController@showLoginForm')->name('login');
@@ -125,6 +137,9 @@ Route::get('/test/xx', function(){
 
 Route::get('/query/vehicle/model', 'VehicleController@queryModel');
 Route::get('/query/vehicle/variant', 'VehicleController@queryVariant');
+//
+Route::get('/query/truck/model', 'VehicleController@queryTruckModel');
+Route::get('/query/truck/variant', 'VehicleController@queryTruckVariant');
 //
 Route::get('/query/insurer','InsurerController@query');
 //

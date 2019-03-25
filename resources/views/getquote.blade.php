@@ -23,7 +23,7 @@
             <div class="table table-striped">
                 <table style="width: 100%; color: #000;">
                     <thead>
-                        <tr style="border: 1px solid black; background-color: #E26A0A;">
+                        <tr style="border: 1px solid black;">
                             <th width="35%">&nbsp;<strong>COVERAGE</strong></th>
                             <th><strong>LIMIT OF LIABILITY</strong></th>
                             <th width="50%" class="text-center"><strong>PREMIUM</strong></th>
@@ -127,7 +127,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3" class="text-center" style="border: 1px solid black; background-color: #FBBF04;">
+                            <td colspan="3" class="text-center" style="border: 1px solid black;">
                                 <strong>CONNEXT INSURANCE AGENCY</strong>
                             </td>
                         </tr>

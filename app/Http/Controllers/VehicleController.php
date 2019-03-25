@@ -86,6 +86,7 @@ class VehicleController extends Controller
     public function queryModel(Request $request){
         $models = Vehicle::select('model')
                     ->where('manufacturer','=',$request->manufacturer)
+                    ->where('type','<',3)
                     ->where('year','=',$request->year)->distinct()->get()->toArray();
 
         sort($models);
@@ -95,9 +96,34 @@ class VehicleController extends Controller
     public function queryVariant(Request $request){
         $variants = Vehicle::select('id','variant', 'transmission', 'displacement')
                     ->where('model','=',$request->model)
+                    ->where('type','<',3)
                     ->where('year','=',$request->year)->get()->toArray();
 
         sort($variants);
         return response()->json(['data'=>$variants]);
     }
+
+    public function queryTruckModel(Request $request){
+        $models = Vehicle::select('model')
+                    ->where('manufacturer','=',$request->manufacturer)
+                    ->where('year','=',$request->year)
+                    ->where('type','=',3)
+                    ->distinct()->get()->toArray();
+
+        sort($models);
+        return response()->json(['data'=>$models]);
+    }
+
+    public function queryTruckVariant(Request $request){
+        $variants = Vehicle::select('id','variant', 'transmission', 'displacement')
+                    ->where('model','=',$request->model)
+                    ->where('year','=',$request->year)
+                    ->where('type','=',3)
+                    ->get()->toArray();
+
+        sort($variants);
+        return response()->json(['data'=>$variants]);
+    }
+
+
 }

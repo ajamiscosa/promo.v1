@@ -15,6 +15,10 @@ class Insurer extends Model
         'name',
         'deductiblefee',
         'accreditedshops',
-        'features'
+        'features',
+        'cat0',
+        'cat1',
+        'cat2',
+        'cat3',
     ];
 }

@@ -89,7 +89,8 @@ class InsurerController extends Controller
             'bi'=>$request->bi,
             'pd'=>$request->pd,
             'aog'=>$request->aog,
-            'aograte'=>$request->aograte
+            'aograte'=>$request->aograte,
+            'type'=>$request->type
         ]);
     }
 }

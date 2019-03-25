@@ -43,6 +43,10 @@ class InquiryController extends Controller
      */
     public function store(Request $request)
     {
+        $baseUrl = env('APP_URL');
+        $url = $request->session()->get('_previous')['url'];
+        $url = str_replace($baseUrl, "", $url);
+
         $client = new AppClient();
         $client->lastname = $request->LastName;
         $client->firstname = $request->FirstName;
@@ -56,13 +60,14 @@ class InquiryController extends Controller
         $client->save();
 
         $inquiry = new Inquiry();
+        $inquiry->type = $request->VehicleCategory;
         $inquiry->variant = $request->Variant;
         $inquiry->client = $client->id;
         $inquiry->year = $request->YearManufactured;
         $inquiry->generateReferenceNumber();
         $inquiry->save();
 
-        return redirect()->to("/vehicle-insurance/quote?cid={$client->id}&qid={$inquiry->refno}");
+        return redirect()->to("{$url}/quote?cid={$client->id}&qid={$inquiry->refno}");
     }
 
     /**
@@ -116,10 +121,22 @@ class InquiryController extends Controller
         return view('vehicle.inquiry', ['data'=>$brand]);
     }
 
+    public function truckInquiry(Request $request){
+        $brand = Manufacturer::find($request->VehicleManufacturerId);
+
+        return view('truck.inquiry', ['data'=>$brand]);
+    }
+
     public function quote(Request $request){
         $client = AppClient::find($request->cid);
         $inquiry = Inquiry::where('refno','=',$request->qid)->first();
         return view('vehicle.quote',['client'=>$client, 'inquiry'=>$inquiry]);
+    }
+
+    public function truckQuote(Request $request){
+        $client = AppClient::find($request->cid);
+        $inquiry = Inquiry::where('refno','=',$request->qid)->first();
+        return view('truck.quote',['client'=>$client, 'inquiry'=>$inquiry]);
     }
 
     public function data(){
@@ -142,6 +159,17 @@ class InquiryController extends Controller
 
 
     public function getquote(Request $request) {
+        $dto = new DTO();
+        $dto->Premium = $request->Premium;
+        $dto->InsuredValue = $request->InsuredValue;
+        $dto->BodilyInjury = BodilyInjury::find($request->BodilyInjury);
+        $dto->PropertyDamage = PropertyDamage::find($request->PropertyDamage);
+        $dto->Agency = Insurer::find($request->Agency);
+        return view('getquote', ['data'=>$dto]);
+    }
+
+
+    public function getTruckQuote(Request $request) {
         $dto = new DTO();
         $dto->Premium = $request->Premium;
         $dto->InsuredValue = $request->InsuredValue;

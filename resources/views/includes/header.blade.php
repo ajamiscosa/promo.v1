@@ -1,3 +1,10 @@
+<style>
+    .i-product-truck-insurance {
+        background-image: url({{ asset('images/truck.png')}});
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+</style>
 <header class="layout-header" role="banner">
     <div class="head container">
        <nav class="menu main-menu" role="navigation">
@@ -11,6 +18,7 @@
                          <div class="column">
                             <ul class="nav child-menu">
                                <li><a id="VehicleInsuranceSubMenu" href="/vehicle-insurance"><i class="icon i-product-vehicle-insurance i-2x"></i>Vehicle Insurance</a></li>
+                               <li><a id="TruckInsuranceSubMenu" href="/truck-insurance"><i class="icon i-product-truck-insurance i-2x"></i>Truck Insurance</a></li>
                                <li><a id="CTPLInsuranceSubMenu" href="/ctpl-insurance"><i class="icon i-product-vehicle-insurance i-2x"></i>CTPL Insurance</a></li>
                                {{-- <li><a id="PropertyInsuranceSubMenu" href="/property-insurance"><i class="icon i-product-property-insurance i-2x"></i>Property Insurance</a></li>
                                <li><a id="HealthInsuranceSubMenu" href="/health-insurance"><i class="icon i-product-health-insurance i-2x"></i>Health Insurance</a></li>

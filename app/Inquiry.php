@@ -35,7 +35,7 @@ class Inquiry extends Model
      * @var array
      */
     protected $fillable = [
-        'variant', 'year', 'client', 'refno'
+        'type', 'variant', 'year', 'client', 'refno'
     ];
 
     public function getClientInfo() {

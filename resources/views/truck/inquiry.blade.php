@@ -2,7 +2,7 @@
 use Carbon\Carbon;
 @endphp
 @extends('app')
-@section('title','Vehicle Insurance | Inquiry')
+@section('title','Truck Insurance | Inquiry')
 @section('content')
 <nav class="breadcrumb">
    <ol>
@@ -27,11 +27,11 @@ use Carbon\Carbon;
 <aside class="promo promo-campaign promo-inline promo-border-top promo-40x60">
    <div class="container">
       <div class="promo-content">
-         <h1 class="f180 p-t-1x m-b-2x">Find the <strong>best car insurance</strong>—fast</h1>
+         <h1 class="f180 p-t-1x m-b-2x">Find the <strong>best truck insurance</strong>—fast</h1>
          <ul class="tick-list f120 m-b-3x">
             <li>Get quotes from different providers</li>
             <li>Compare deductibles, accredited motorshops, claims ratings, and more</li>
-            <li>Enjoy guaranteed savings of up to P10,000, depending on car model</li>
+            <li>Enjoy guaranteed savings of up to P10,000, depending on truck model</li>
          </ul>
          <p class="f140 m-b-3x">Start here<span class="pointer rotate-90"><i class="icon i-hint-point-left i-5x"></i></span></p>
       </div>
@@ -43,31 +43,12 @@ use Carbon\Carbon;
    <div class="content">
       <form action="/vehicle-insurance/inquiry/store" method="POST">
          {{ csrf_field() }}
-         <div class="wizard-panel step-wizard-panel wizard-plain">
-            <div class="wizard-section clearfix">
-               <div class="col-sm-12 col-md-5 col-lg-6">
-                  <h3>When is your use for your <b class='vehicle-name'>{{ $data->name }}</b>  car?</h3>
-                  <p>Please indicate the type of your vehicle.</p>
-               </div>
-               <div class="col-sm-12 col-md-7 col-lg-6">
-                  <div class="option-amend extra-years active">
-                     <select class="select form-control" id="VehicleCategory" name="VehicleCategory" required>
-                        <option value="-1">- Please Select -</option>
-                        <option value="0">Private</option>
-                        <option value="1">TNVS</option>
-                        <option value="2">Yellow Plate</option>
-                     </select>
-                     <label for="VehicleType_Other" class="error">Please select vehiicle type</label>
-                  </div>
-               </div>
-               <!-- /ko -->
-            </div>
-         </div>
+         <input type="hidden" name="VehicleCategory" value="3" />
          <div class="wizard-panel step-wizard-panel wizard-plain">
             <div class="wizard-section clearfix">
                <div class="col-sm-12 col-md-5 col-lg-6">
                   <h3>When was your <b class='vehicle-name'>{{ $data->name }}</b>  manufactured?</h3>
-                  <p>Please indicate the year your car was made.</p>
+                  <p>Please indicate the year your truck was made.</p>
                </div>
                <div class="col-sm-12 col-md-7 col-lg-6">
                   <div class="option-amend extra-years active">
@@ -86,17 +67,13 @@ use Carbon\Carbon;
          <div class="wizard-panel step-wizard-panel wizard-plain">
             <div class="wizard-section clearfix">
                <div class="col-sm-12 col-md-5 col-lg-6">
-                  <h3>What model family is your <b class='vehicle-name'>{{ $data->name }}</b>  car?</h3>
+                  <h3>What model family is your <b class='vehicle-name'>{{ $data->name }}</b>  truck?</h3>
                   <p>Please choose your vehicle's model family.</p>
                </div>
                <div class="col-sm-12 col-md-7 col-lg-6">
                   <div class="option-amend extra-years active">
                      <select class="select form-control" id="Model" name="Model" required>
                         <option value="-1">- Please Select -</option>
-                        @foreach (App\Vehicle::where('manufacturer','=',$data->id)->get()  as $item)
-                           <option value="{{ $item->id }}">{{ $item->name }}</option>
-                        @endforeach
-
                      </select>
                      <label for="ManufacturingYear_Other" class="error">Please choose vehicle model family</label>
                   </div>
@@ -107,7 +84,7 @@ use Carbon\Carbon;
          <div class="wizard-panel step-wizard-panel wizard-plain">
             <div class="wizard-section clearfix">
                <div class="col-sm-12 col-md-5 col-lg-6">
-                  <h3>What series is your <b class='vehicle-name'>{{ $data->name }}</b>  car?</h3>
+                  <h3>What series is your <b class='vehicle-name'>{{ $data->name }}</b>  truck?</h3>
                   <p>Please choose your vehicle's variant.</p>
                </div>
                <div class="col-sm-12 col-md-7 col-lg-6">
@@ -124,7 +101,7 @@ use Carbon\Carbon;
             <hr/>
             <div class="wizard-section clearfix">
                <div class="col-sm-12 col-md-5 col-lg-6">
-                  <h3>We are now finding the best car insurance for you.</h3>
+                  <h3>We are now finding the best truck insurance for you.</h3>
                   <p>We’ll send you a list of the top quotes for your reference.</p>
                </div>
                <div class="col-sm-12 col-md-7 col-lg-6">
@@ -256,7 +233,7 @@ use Carbon\Carbon;
 
          $.ajax({
             method: "get",
-            url: "/query/vehicle/model",
+            url: "/query/truck/model",
             data: { year: selectedYear, manufacturer: {{ $data->id }} }
          }).done(function( msg ) {
             $.each(msg.data, function(i, item){
@@ -281,7 +258,7 @@ use Carbon\Carbon;
          }));
          $.ajax({
             method: "get",
-            url: "/query/vehicle/variant",
+            url: "/query/truck/variant",
             data: { year: selectedYear, model: selectedModel }
          }).done(function( msg ) {
             $.each(msg.data, function(i, item){

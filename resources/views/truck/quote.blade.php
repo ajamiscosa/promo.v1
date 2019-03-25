@@ -1,5 +1,5 @@
 @extends('app')
-@section('title','Vehicle Insurance | Quotation')
+@section('title','Truck Insurance | Quotation')
 @section('styles')
 <link href="{{ asset('css/css.css') }}" rel="stylesheet" type="text/css">
 @endsection
@@ -8,7 +8,7 @@
 	<div class="breadcrumb">
 		<ol>
 			<li><a href="/">Home</a></li>
-			<li><a href="/vehicle-insurance">Vehicle Insurance</a></li>
+			<li><a href="/truck-insurance">Truck Insurance</a></li>
 			<li class="active">Compare</li>
 		</ol>
 	</div>
@@ -16,7 +16,7 @@
 <div class="page-content">
 	<div class="container page-main">
 		<div class="desktop-title">
-			<h1 class="o80">Compare Auto Insurance</h1>
+			<h1 class="o80">Compare Truck Insurance</h1>
 		</div>
 		<div class="main-content clearfix contentSection">
 			<div class="side-panel sidePanelOptions" data-container-title="Actions">
@@ -147,8 +147,8 @@
 														<option selected="selected" value="1">Comprehensive</option>
 														<option value="3">Compulsory Third Party Liability (CTPL)</option>
 													</select>
-                                                </div>
-												<input type="hidden" id="VehicleType" value="{{ $inquiry->type }}" />
+												</div>
+												<input type="hidden" id="VehicleType" value="{{$inquiry->getVehicle()->type}}" />
 												<div class="form-group">
 													<label class="control-label" for="OptimizeInsuredValueAmount">Insured Value</label>
 													<div class="input-group">
@@ -405,8 +405,7 @@
 						</a>
 						</div>
 						<div class="button-row" data-bind="if: ContactMeClosingChannelId != 0, visible : ContactMeClosingChannelId != 0">
-						    <a href="javascript:;" class="btn btn-ghost-default btn-block result-contact" data-container-type="2" data-button-type="link"
-						       data-bind="attr: { 'data-analytics' : '{0}|{1}|{2}|{3}'.format('MOT', 'Result_ContactMe_Launch', DisplayedCompanyProductName, 5), 'data-company' : DisplayedCompanyName, 'data-companyid' : CompanyId}, css : { disabled : !$root.canContinue() }, attrIf: {'data-toggle': 'modal', _if: $root.canContinue, 'data-guid': ResultGuid}">
+						    <a href="javascript:;" class="btn btn-ghost-default btn-block result-contact">
 						        Contact Me
 						    </a>
 						</div>
