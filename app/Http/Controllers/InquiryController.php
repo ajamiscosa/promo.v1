@@ -130,12 +130,20 @@ class InquiryController extends Controller
     public function quote(Request $request){
         $client = AppClient::find($request->cid);
         $inquiry = Inquiry::where('refno','=',$request->qid)->first();
+        if($inquiry->type<0 || $inquiry->type>2){
+            return redirect()->to('404');
+        }
         return view('vehicle.quote',['client'=>$client, 'inquiry'=>$inquiry]);
     }
 
     public function truckQuote(Request $request){
         $client = AppClient::find($request->cid);
         $inquiry = Inquiry::where('refno','=',$request->qid)->first();
+
+        if($inquiry->type!=3){
+            return redirect()->to('404');
+        }
+
         return view('truck.quote',['client'=>$client, 'inquiry'=>$inquiry]);
     }
 
