@@ -12,6 +12,7 @@ use App\Classes\DTO;
 use App\BodilyInjury;
 use App\PropertyDamage;
 use App\Insurer;
+use App\Contract;
 
 class InquiryController extends Controller
 {
@@ -133,6 +134,9 @@ class InquiryController extends Controller
         if($inquiry->type<0 || $inquiry->type>2){
             return redirect()->to('404');
         }
+
+        $contract = new Contract();
+
         return view('vehicle.quote',['client'=>$client, 'inquiry'=>$inquiry]);
     }
 
@@ -173,6 +177,7 @@ class InquiryController extends Controller
         $dto->BodilyInjury = BodilyInjury::find($request->BodilyInjury);
         $dto->PropertyDamage = PropertyDamage::find($request->PropertyDamage);
         $dto->Agency = Insurer::find($request->Agency);
+        // $dto->HasAOG = $
         return view('getquote', ['data'=>$dto]);
     }
 
@@ -185,5 +190,9 @@ class InquiryController extends Controller
         $dto->PropertyDamage = PropertyDamage::find($request->PropertyDamage);
         $dto->Agency = Insurer::find($request->Agency);
         return view('getquote', ['data'=>$dto]);
+    }
+
+    public function acceptquote(Request $request) {
+
     }
 }

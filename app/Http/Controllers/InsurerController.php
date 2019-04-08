@@ -90,7 +90,12 @@ class InsurerController extends Controller
             'pd'=>$request->pd,
             'aog'=>$request->aog,
             'aograte'=>$request->aograte,
-            'type'=>$request->type
+            'type'=>$request->type,
+            'grocery'=>$request->grocery,
+            'water'=>$request->water,
+            'electric'=>$request->electric,
+            'hospital'=>$request->hospital,
+            'rice'=>$request->rice
         ]);
     }
 }

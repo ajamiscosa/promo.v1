@@ -21,7 +21,7 @@
 		<div class="main-content clearfix contentSection">
 			<div class="side-panel sidePanelOptions" data-container-title="Actions">
 				<div class="side-nav-container mot-result" style="">
-					<form action="/compare-auto-insurance-quotes/Input1_DATAPOST" id="calcform" method="post" novalidate="novalidate">
+					<form id="calcform" method="post" novalidate="novalidate">
 						<div id="vehicleSelect">
 							<div class="form-container input-summary m-b-0 p-b-1x">
 								<div class="form-nosize">
@@ -206,7 +206,7 @@
 											</div>
 											<div class="form-resize">
 												<div class="form-group">
-													<input checked="checked" id="HasAOG" name="HasAOG" type="checkbox" value="true" aria-invalid="false" aria-describedby="HasAOG-error" class="valid"><input name="HasAOG" type="hidden" value="false" aria-invalid="false" aria-describedby="HasAOG-error" class="valid">
+													<input checked="checked" id="HasAOG" name="HasAOG" type="checkbox" value="true"><input name="HasAOG" type="hidden" value="false">
 													<label class="control-label" for="HasAOG">Acts of God</label>
 												</div>
 												<div class="form-group">
@@ -238,12 +238,46 @@
 															<option value="20">20</option>
 														</select>
 													</div>
+                                                </div>
+											</div>
+                                            <div class="form-nosize">
+                                                <div class="form-group">
+                                                    <label class="control-label">Add Ons:</label>
+                                                    <a class="help-icon" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="You may add additional benefits such as:
+                                                        <br/><br/>
+                                                        - Acts of God (AOG) - coverages against natural calamities such as flood, typhoon, hurricane, volcanic eruption and earthquake<br/><br/>
+                                                        - Personal Accident - insurance coverage that will answer for the death, disablement and medical expenses of the driver and passengers in the unfortunate event of an accident<br/><br/>
+                                                        - Riot, Strike, Civil Commotion - an added coverage but is subject for approval by the insurance companies" data-original-title="Add Ons:">
+                                                    <i class="icon i-action-info-circle-solid"></i>
+                                                    <i class="icon i-action-info-circle"></i>
+                                                    </a>
+                                                </div>
+												<div class="form-group">
+                                                    <input id="HasGrocery" name="HasGrocery" type="checkbox" value="false">
+                                                    <input name="HasGrocery" type="hidden" value="false">
+													<label class="control-label" for="HasGrocery">Grocery</label>
 												</div>
 												<div class="form-group">
-													<input data-val="true" data-val-required="The hasRiotStrikeCivilCommotionRisk field is required." id="hasRiotStrikeCivilCommotionRisk" name="hasRiotStrikeCivilCommotionRisk" type="checkbox" value="true" aria-invalid="false" aria-describedby="hasRiotStrikeCivilCommotionRisk-error" class="valid"><input name="hasRiotStrikeCivilCommotionRisk" type="hidden" value="false" aria-invalid="false" aria-describedby="hasRiotStrikeCivilCommotionRisk-error" class="valid">
-													<label class="control-label" for="hasRiotStrikeCivilCommotionRisk">Strike, Riot, Civil Commotion</label>
+                                                    <input id="HasWaterBill" name="HasWaterBill" type="checkbox" value="false">
+                                                    <input name="HasWaterBill" type="hidden" value="false">
+													<label class="control-label" for="HasWaterBill">Water Bill</label>
 												</div>
-											</div>
+												<div class="form-group">
+                                                    <input id="HasElectricBill" name="HasElectricBill" type="checkbox" value="false">
+                                                    <input name="HasElectricBill" type="hidden" value="false">
+													<label class="control-label" for="HasElectricBill">Electricity Bill</label>
+												</div>
+												<div class="form-group">
+                                                    <input id="HasHospitalization" name="HasHospitalization" type="checkbox" value="false">
+                                                    <input name="HasHospitalization" type="hidden" value="false">
+													<label class="control-label" for="HasHospitalization">Hospitalization</label>
+												</div>
+												<div class="form-group">
+                                                    <input id="HasRice" name="HasRice" type="checkbox" value="false">
+                                                    <input name="HasRice" type="hidden" value="false">
+													<label class="control-label" for="HasRice">Rice</label>
+												</div>
+                                            </div>
 											<div class="form-nosize mobile-buttons">
 												<button class="btn btn-default btn-block" data-bind="click: ResultTable.triggerCalc">Update Result</button>
 											</div>
@@ -264,7 +298,7 @@
 				<div class="result-main" data-container-title="Your Results">
 					<div class="result-bind-context mot" data-bind="visible: isPageReady" style="">
 						<div class="result-container">
-							<div class="result-head clearfix" data-bind="visible: !isCalculating() &amp;&amp; !hasNoResults()" style="">
+							<div class="result-head clearfix" style="">
 								<div class="result-title float-left o80">
 									<h4 class="m-y-0" style="">Congratulations, we've found <strong>{{ count(App\Insurer::all()) }}</strong> matches</h4>
 								</div>
@@ -679,6 +713,31 @@
 	    loadInsurers();
 	});
 
+	$('#HasGrocery').on('change', function(){
+	    loadInsurers();
+        console.log($('#HasGrocery').is(":checked"));
+	});
+
+	$('#HasWaterBill').on('change', function(){
+	    loadInsurers();
+        console.log($('#HasWaterBill').is(":checked"));
+	});
+
+	$('#HasElectricBill').on('change', function(){
+	    loadInsurers();
+        console.log($('#HasElectricBill').is(":checked"));
+	});
+
+	$('#HasHospitalization').on('change', function(){
+	    loadInsurers();
+        console.log($('#HasHospitalization').is(":checked"));
+	});
+
+	$('#HasRice').on('change', function(){
+	    loadInsurers();
+        console.log($('#HasRice').is(":checked"));
+	});
+
 
 	function loadInsurers() {
 	    var _price = $('#OptimizeInsuredValueAmount').val();
@@ -687,12 +746,39 @@
 	    var _aog = $('#HasAOG').is(":checked");
 	    var _vType = $('#VehicleType').val();
 	    // var _aograte = _vType==1?0.005:0.003;
+        var _hasGrocery = $('#HasGrocery').is(":checked");
+        var _hasWaterBill = $('#HasWaterBill').is(":checked");
+        var _hasElectricBill = $('#HasElectricBill').is(":checked");
+        var _hasHospitalization = $('#HasHospitalization').is(":checked");
+        var _hasRice = $('#HasRice').is(":checked");
+
+        console.log('HasAOG');
+        console.log(_aog);
+        console.log('--------------------');
+        console.log(_hasGrocery);
+        console.log(_hasWaterBill);
+        console.log(_hasElectricBill);
+        console.log(_hasHospitalization);
+        console.log(_hasRice);
+        console.log('--------------------');
 
 	    $.ajax({
 	        method: "get",
 	        url: "/query/insurer",
 	        // data: { price: _price, bi: _bi, pd: _pd, aog: _aog, aograte: _aograte },
-	        data: { price: _price, bi: _bi, pd: _pd, type: _vType},
+	        data: {
+                price: _price,
+                bi: _bi,
+                pd: _pd,
+                type: _vType,
+                aog: _aog,
+                //
+                grocery: _hasGrocery,
+                water: _hasWaterBill,
+                electric: _hasElectricBill,
+                hospital: _hasHospitalization,
+                rice: _hasRice
+            },
 	        success: function(data, textStatus) {
 	            $(".result-row-container").html(data);
 	        },

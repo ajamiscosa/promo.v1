@@ -35,6 +35,7 @@ Route::post('/vehicle-insurance/inquiry', 'InquiryController@vehicleInquiry');
 Route::post('/vehicle-insurance/inquiry/store', 'InquiryController@store');
 Route::get('/vehicle-insurance/quote', 'InquiryController@quote');
 Route::post('/vehicle-insurance/quote/get', 'InquiryController@getquote');
+Route::post('/vehicle-insurance/quote/accept', 'InquiryController@acceptquote');
 
 Route::post('/truck-insurance/inquiry','InquiryController@truckInquiry');
 Route::post('/truck-insurance/inquiry/store', 'InquiryController@store');

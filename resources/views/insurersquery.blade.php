@@ -19,7 +19,12 @@ $field = "cat{$type}";
             'bi'=>$bi,
             'pd'=>$pd,
             'aog'=>$aog,
-            'rate'=>$rate
+            'rate'=>$rate,
+            'grocery'=>$grocery,
+            'water'=>$water,
+            'electric'=>$electric,
+            'hospital'=>$hospital,
+            'rice'=>$rice
         ])
     @endif
 @endforeach

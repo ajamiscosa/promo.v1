@@ -3,8 +3,13 @@
     $_pd = App\PropertyDamage::where('coverage','=',$pd)->first();
 
 
+
     $lossdmg = $price * $rate;
-    $aogprice = $price * 0.003;
+    $aogprice = 0;
+    if($aog=='true') {
+        $aogprice = $price * 0.003;
+    }
+
     $premium = $lossdmg + $aogprice + $_bi->addon + $_pd->addon;
 
     $documentStamp = $premium * 0.125;
@@ -21,6 +26,34 @@
     else {
         $url = "/truck-insurance";
     }
+
+    $counter = 0;
+    $addonCoverages = array();
+    if($grocery=='true') {
+        $counter++;
+        array_push($addonCoverages, 'Grocery');
+    }
+    if($water=='true') {
+        $counter++;
+        array_push($addonCoverages, 'Water Bill');
+    }
+    if($electric=='true') {
+        $counter++;
+        array_push($addonCoverages, 'Electricity Bill');
+    }
+    if($hospital=='true') {
+        $counter++;
+        array_push($addonCoverages, 'Hospitalization');
+    }
+    if($rice=='true') {
+        $counter++;
+        array_push($addonCoverages, 'Rice');
+    }
+
+    if($counter > 2) {
+        $totalPremium = $totalPremium + ( ($counter-2) * 98 );
+    }
+
 @endphp
 <div class="result-item result-row">
     <div class="result-pinned" style="display: none;">Featured Product</div>
@@ -159,7 +192,7 @@
                                 </tbody>
                                 <tbody>
                                     <tr>
-                                        <th rowspan="5">Additional coverages</th>
+                                    <th rowspan="{{ 5+$counter }}">Additional coverages</th>
                                         <td colspan="2">Voluntary Third Party Liability - Bodily Injury</td>
 
                                         <td>Php. {{ number_format($_bi->addon,2,'.',',') }}</td>
@@ -194,6 +227,25 @@
                                         <td>included</td>
                                         <td> </td>
                                     </tr>
+                                    @foreach($addonCoverages as $coverage)
+                                        <tr>
+                                            <th rowspan="5" style="display: none;">Additional coverages</th>
+                                            <td colspan="2">{{ $coverage }}</td>
+
+                                            @if($loop->index>1)
+                                            <td>Php. 98.00</td>
+                                            @else
+                                            <td>Php. 0.00</td>
+                                            @endif
+
+                                            @if($loop->index>1)
+                                            <td>&nbsp;</td>
+                                            @else
+                                            <td>FREE</td>
+                                            @endif
+                                            <td> </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                                 <tbody>
                                     <tr>

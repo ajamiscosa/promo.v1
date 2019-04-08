@@ -138,7 +138,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="" role="button" class="btn btn-primary btn-block">Pay Now</a>
+                    <a href="/vehicle-insurance/quote/accept" role="button" class="btn btn-primary btn-block">Continue</a>
                 </div>
             </div>
         </div>
