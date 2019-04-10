@@ -37,7 +37,7 @@
                                 <div class="row" style="display: flex;align-items: center;">
                                     <div class="col-lg-12 shittycenter">
                                         <div class="col-lg-7">
-                                            <div><strong>PREMIUM WITH ACTS OF GOD</strong></div>
+                                            <div><strong>PREMIUM {{ $data->HasAOG ? "WITH ACTS OF GOD":"" }}</strong></div>
                                         </div>
                                         <div class="col-lg-5 text-right"><strong style="color: red; font-size: 1.25em">{{ number_format($data->Premium,2,'.',',') }}</strong>&nbsp;&nbsp;&nbsp;</div>
                                     </div>
@@ -138,7 +138,19 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="/vehicle-insurance/quote/accept" role="button" class="btn btn-primary btn-block">Continue</a>
+                    <form action="/vehicle-insurance/quote/accept" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="InsuredValue" value="{{ $data->InsuredValue }}">
+                        <input type="hidden" name="BodilyInjury" value="{{ $data->BodilyInjury->coverage }}">
+                        <input type="hidden" name="PropertyDamage" value="{{ $data->PropertyDamage->coverage }}">
+                        <input type="hidden" name="PersonalAccident" value="250000.00">
+                        <input type="hidden" name="Premium" value="{{ $data->Premium }}">
+                        <input type="hidden" name="Rate" value="{{ $data->Rate }}">
+                        <input type="hidden" name="AOGPrice" value="{{ $data->AOGPrice }}">
+                        <input type="hidden" name="Client" value="{{ $data->Client }}">
+                        <input type="hidden" name="Inquiry" value="{{ $data->Inquiry }}">
+                        <button type="submit" role="button" class="btn btn-primary btn-block">Continue</button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -95,7 +95,9 @@ class InsurerController extends Controller
             'water'=>$request->water,
             'electric'=>$request->electric,
             'hospital'=>$request->hospital,
-            'rice'=>$request->rice
+            'rice'=>$request->rice,
+            'client'=>$request->client,
+            'inquiry'=>$request->inquiry
         ]);
     }
 }

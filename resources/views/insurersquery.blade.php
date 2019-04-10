@@ -24,7 +24,9 @@ $field = "cat{$type}";
             'water'=>$water,
             'electric'=>$electric,
             'hospital'=>$hospital,
-            'rice'=>$rice
+            'rice'=>$rice,
+            'client'=>$client,
+            'inquiry'=>$inquiry
         ])
     @endif
 @endforeach

@@ -135,8 +135,6 @@ class InquiryController extends Controller
             return redirect()->to('404');
         }
 
-        $contract = new Contract();
-
         return view('vehicle.quote',['client'=>$client, 'inquiry'=>$inquiry]);
     }
 
@@ -177,7 +175,11 @@ class InquiryController extends Controller
         $dto->BodilyInjury = BodilyInjury::find($request->BodilyInjury);
         $dto->PropertyDamage = PropertyDamage::find($request->PropertyDamage);
         $dto->Agency = Insurer::find($request->Agency);
-        // $dto->HasAOG = $
+        $dto->HasAOG = $request->HasAOG;
+        $dto->AOGPrice = $request->AOGPrice;
+        $dto->Rate = $request->Rate;
+        $dto->Client = $request->Client;
+        $dto->Inquiry = $request->Inquiry;
         return view('getquote', ['data'=>$dto]);
     }
 
@@ -189,10 +191,37 @@ class InquiryController extends Controller
         $dto->BodilyInjury = BodilyInjury::find($request->BodilyInjury);
         $dto->PropertyDamage = PropertyDamage::find($request->PropertyDamage);
         $dto->Agency = Insurer::find($request->Agency);
+        $dto->HasAOG = $request->HasAOG;
+        $dto->AOGPrice = $request->AOGPrice;
+        $dto->Rate = $request->Rate;
+        $dto->Client = $request->Client;
+        $dto->Inquiry = $request->Inquiry;
         return view('getquote', ['data'=>$dto]);
     }
 
     public function acceptquote(Request $request) {
 
+        $client = AppClient::find($request->Client);
+        $inquiry = Inquiry::find($request->Inquiry);
+
+        $dto = new DTO();
+        $dto->InsuredValue = $request->InsuredValue;
+        $dto->BodilyInjury = $request->BodilyInjury;
+        $dto->PropertyDamage = $request->PropertyDamage;
+        $dto->PersonalAccident = $request->PersonalAccident;
+        $dto->Premium = $request->Premium;
+        $dto->Rate = $request->Rate;
+        $dto->AOGPrice = $request->AOGPrice;
+
+        return view('acceptquote',[
+            'client'=>$client,
+            'inquiry'=>$inquiry,
+            'data'=> $dto
+        ]);
+    }
+
+    public function complete(Request $request) {
+        $contract = new Contract();
+        dd($request);
     }
 }

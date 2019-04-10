@@ -3,7 +3,6 @@
     $_pd = App\PropertyDamage::where('coverage','=',$pd)->first();
 
 
-
     $lossdmg = $price * $rate;
     $aogprice = 0;
     if($aog=='true') {
@@ -66,13 +65,20 @@
                 </div>
                 <div class="result-buttons pb-0 mb-0">
                     <div class="button-row">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="InsuredValue" value="{{ $price }}">
-                            <input type="hidden" name="BodilyInjury" value="{{ $_bi->id }}">
-                            <input type="hidden" name="PropertyDamage" value="{{ $_pd->id }}">
-                            <input type="hidden" name="Premium" value="{{ $totalPremium }}">
-                            <input type="hidden" name="Agency" value="{{ $data->id }}">
-                            <button type="submit" class="btn btn-default btn-block" style="margin-bottom: 0px !important;">Get Quote</button>
+                        {{ csrf_field() }}
+                        <input type="hidden" name="Client" value="{{ $client }}">
+                        <input type="hidden" name="Inquiry" value="{{ $inquiry }}">
+                        <input type="hidden" name="InsuredValue" value="{{ $price }}">
+                        <input type="hidden" name="Rate" value="{{ $rate }}">
+                        <input type="hidden" name="HasAOG" value="{{ $aog=='true'?true:false }}">
+                        @if($aog=='true')
+                            <input type="hidden" name="AOGPrice" value="{{ $aogprice }}">
+                        @endif
+                        <input type="hidden" name="BodilyInjury" value="{{ $_bi->id }}">
+                        <input type="hidden" name="PropertyDamage" value="{{ $_pd->id }}">
+                        <input type="hidden" name="Premium" value="{{ $totalPremium }}">
+                        <input type="hidden" name="Agency" value="{{ $data->id }}">
+                        <button type="submit" class="btn btn-default btn-block" style="margin-bottom: 0px !important;">Get Quote</button>
                     </div>
                     <div class="button-row">
                         <a href="javascript:;" class="btn btn-ghost-default btn-block result-contact"  style="margin-bottom: 0px !important;">
@@ -227,9 +233,9 @@
                                         <td>included</td>
                                         <td> </td>
                                     </tr>
-                                    @foreach($addonCoverages as $coverage)
-                                        <tr>
-                                            <th rowspan="5" style="display: none;">Additional coverages</th>
+                                    @foreach($addonCoverages as $coverage)id
+                                        <tr>id
+                                            <th rowspan="5" style="display: nidone;">Additional coverages</th>
                                             <td colspan="2">{{ $coverage }}</td>
 
                                             @if($loop->index>1)

@@ -4,6 +4,8 @@
 <link href="{{ asset('css/css.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')
+<input type="hidden" name="Client" id="Client" value="{{ $client->id }}">
+<input type="hidden" name="Inquiry" id="Inquiry" value="{{ $inquiry->id }}">
 <div class="calcer-bread">
 	<div class="breadcrumb">
 		<ol>
@@ -25,7 +27,7 @@
 						<div id="vehicleSelect">
 							<div class="form-container input-summary m-b-0 p-b-1x">
 								<div class="form-nosize">
-									<div class="input-summary-wrap o80">You are a <b>{{ $client->title }} {{ $client->firstname }} {{ $client->lastname }}</b> owning a <b>{{ $inquiry->getVehicleInfo() }}</b></div>
+									<div class="input-summary-wrap o80">You are <b>{{ $client->title }} {{ $client->firstname }} {{ $client->lastname }}</b> owning a <b>{{ $inquiry->getVehicleInfo() }}</b></div>
 								</div>
 							</div>
 							<input class="btn btn-warning btn-block m-b-1x m-t-0 valid" id="backToWizard" type="button" value="Change" aria-invalid="false">
@@ -751,6 +753,9 @@
         var _hasElectricBill = $('#HasElectricBill').is(":checked");
         var _hasHospitalization = $('#HasHospitalization').is(":checked");
         var _hasRice = $('#HasRice').is(":checked");
+        //
+        var _client = $('#Client').val();
+        var _inquiry = $('#Inquiry').val();
 
         console.log('HasAOG');
         console.log(_aog);
@@ -761,6 +766,8 @@
         console.log(_hasHospitalization);
         console.log(_hasRice);
         console.log('--------------------');
+        console.log(_client);
+        console.log(_inquiry);
 
 	    $.ajax({
 	        method: "get",
@@ -777,7 +784,10 @@
                 water: _hasWaterBill,
                 electric: _hasElectricBill,
                 hospital: _hasHospitalization,
-                rice: _hasRice
+                rice: _hasRice,
+                //
+                client: _client,
+                inquiry: _inquiry
             },
 	        success: function(data, textStatus) {
 	            $(".result-row-container").html(data);
