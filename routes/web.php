@@ -147,3 +147,12 @@ Route::get('/query/insurer','InsurerController@query');
 //
 Route::get('/query/cities','CityController@query');
 Route::get('/query/brgy','BarangayController@query');
+
+
+Route::get('/testshit', function(){
+    return view('sample');
+});
+
+Route::get('/testshit/print', function(){
+    return view('welcome');
+});

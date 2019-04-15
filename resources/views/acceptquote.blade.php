@@ -30,7 +30,7 @@
     </nav>
     <article class="article">
         <div class="content">
-            <form id="step-wizard-form" action="/vehicle-insurance/quote/complete" method="post">
+            <form id="step-wizard-form" action="/vehicle-insurance/quote/complete " method="post">
                 <input type="hidden" name="Type" value="{{ $inquiry->type }}">
                 {{ csrf_field() }}
                 <fieldset>

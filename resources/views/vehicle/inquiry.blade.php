@@ -46,7 +46,7 @@ use Carbon\Carbon;
          <div class="wizard-panel step-wizard-panel wizard-plain">
             <div class="wizard-section clearfix">
                <div class="col-sm-12 col-md-5 col-lg-6">
-                  <h3>When is your use for your <b class='vehicle-name'>{{ $data->name }}</b>  car?</h3>
+                  <h3>What is your use for your <b class='vehicle-name'>{{ $data->name }}</b>  car?</h3>
                   <p>Please indicate the type of your vehicle.</p>
                </div>
                <div class="col-sm-12 col-md-7 col-lg-6">
@@ -142,8 +142,8 @@ use Carbon\Carbon;
                         <!-- /ko -->
                      </li>
                      <li>
-                        <div class="columns">
-                           <div class="column column-1">
+                        <div class="row">
+                           <div class="col-lg-6 col-md-12">
                               <!-- ko if: true -->
                               <div class="form-group ">
                                  <label for="FirstName">First Name</label>
@@ -151,7 +151,7 @@ use Carbon\Carbon;
                               </div>
                               <!-- /ko -->
                            </div>
-                           <div class="column column-2">
+                           <div class="col-lg-6 col-md-12">
                               <!-- ko if: true -->
                               <div class="form-group ">
                                  <label for="LastName">Last Name</label>
@@ -162,8 +162,8 @@ use Carbon\Carbon;
                         </div>
                      </li>
                      <li>
-                        <div class="columns">
-                           <div class="column column-1">
+                        <div class="row">
+                           <div class="col-lg-6 col-md-12">
                               <!-- ko if: true -->
                               <div class="form-group ">
                                  <label for="PhoneNumber">Phone Number</label>
@@ -171,7 +171,7 @@ use Carbon\Carbon;
                               </div>
                               <!-- /ko -->
                            </div>
-                           <div class="column column-2">
+                           <div class="col-lg-6 col-md-12">
                               <!-- ko if: true -->
                               <div class="form-group ">
                                  <label for="MobileNumber">Mobile Number</label>
@@ -182,8 +182,8 @@ use Carbon\Carbon;
                         </div>
                      </li>
                      <li>
-                        <div class="columns">
-                           <div class="column column-1">
+                        <div class="row">
+                           <div class="col-lg-6 col-md-12">
                               <!-- ko if: true -->
                               <div class="form-group ">
                                  <label for="Email">Email</label>
@@ -191,7 +191,7 @@ use Carbon\Carbon;
                               </div>
                               <!-- /ko -->
                            </div>
-                           <div class="column column-2">
+                           <div class="col-lg-6 col-md-12">
                               <div class="form-group">
                                  <label for="schedule-time">Preferred call time:</label>
                                  <select class="select required form-control" id="schedule-time" name="Schedule" tabindex="8" data-validate="required" data-remarks="TimeAvailable">
@@ -203,15 +203,19 @@ use Carbon\Carbon;
                            </div>
                         </div>
                      </li>
-
+                     <li>
+                         <div class="row">
+                             <div class="col-lg-12">
+                                <div class="checkbox text-justify">
+                                    <label style="padding-right: 0px;">
+                                        <input type="checkbox" id="Agree" name="Agree" class="cmr-agreement" value="true" required>
+                                        I allow eCompaMore to collect, store and process my personal information - including but not limited to my name, address, phone number, email, etc., as supplied for transactions on this website. Transactions may include cookie placement, personalized offers, enrollment in its newsletter and others. The use and processing of my information shall be in accordance with applicable laws and eCompareMo’s <a href="https://www.eCompaMore.com/terms-conditions">Terms and Conditions</a> and <a href="https://www.eCompaMore.com/privacy-policy">Privacy Policy</a>, which I confirm to have read and understood.
+                                    </label>
+                                </div>
+                             </div>
+                         </div>
+                     </li>
                   </ul>
-                  <div class="checkbox">
-                     <label>
-                        <input type="checkbox" id="Agree" name="Agree" class="cmr-agreement" value="true" required>
-                        I allow eCompaMore to collect, store and process my personal information - including but not limited to my name, address, phone number, email, etc., as supplied for transactions on this website. Transactions may include cookie placement, personalized offers, enrollment in its newsletter and others. The use and processing of my information shall be in accordance with applicable laws and eCompareMo’s <a href="https://www.eCompaMore.com/terms-conditions">Terms and Conditions</a> and <a href="https://www.eCompaMore.com/privacy-policy">Privacy Policy</a>, which I confirm to have read and understood.
-                     </label>
-                  </div>
-                  <span class="wizard-help hide"><i class="icon i-action-info-circle-solid i-2x"></i></span>
                   <br/>
                   <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
                </div>
