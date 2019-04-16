@@ -32,6 +32,16 @@
         <div class="content">
             <form id="step-wizard-form" action="/vehicle-insurance/quote/complete " method="post">
                 <input type="hidden" name="Type" value="{{ $inquiry->type }}">
+                <input type="hidden" name="ClientID" value="{{ $client->id }}">
+                <input type="hidden" name="VariantID" value="{{ $inquiry->variant }}">
+
+                <input type="hidden" name="InsuredValue" value="{{ $data->InsuredValue }}">
+                <input type="hidden" name="BodilyInjury" value="{{ $data->BodilyInjury }}">
+                <input type="hidden" name="PropertyDamage" value="{{ $data->PropertyDamage }}">
+                <input type="hidden" name="PersonalAccident" value="250000.00">
+                <input type="hidden" name="Premium" value="{{ $data->Premium }}">
+                <input type="hidden" name="Rate" value="{{ $data->Rate }}">
+                <input type="hidden" name="AOGPrice" value="{{ $data->AOGPrice }}">
                 {{ csrf_field() }}
                 <fieldset>
                     <div class="wizard-panel wizard-panel-inline">

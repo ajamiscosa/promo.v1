@@ -13,6 +13,7 @@ use App\BodilyInjury;
 use App\PropertyDamage;
 use App\Insurer;
 use App\Contract;
+use App\Vehicle;
 
 class InquiryController extends Controller
 {
@@ -221,7 +222,38 @@ class InquiryController extends Controller
     }
 
     public function complete(Request $request) {
+
+        $dto = new DTO();
+        $dto->InsuredValue = $request->InsuredValue;
+        $dto->BodilyInjury = $request->BodilyInjury;
+        $dto->PropertyDamage = $request->PropertyDamage;
+        $dto->PersonalAccident = $request->PersonalAccident;
+        $dto->Premium = $request->Premium;
+        $dto->Rate = $request->Rate;
+        $dto->AOGPrice = $request->AOGPrice;
+
+        // dd($dto);
+
+        $client = AppClient::find($request->ClientID);
+        $client->middlename = $request->MiddleName;
+        $client->addressline1 = $request->StreetLine1;
+        $client->brgy = $request->BarangayId;
+        $client->fulladdress = $client->getCompleteAddress($request->Village);
+        // $client->save();
+
+        $variant = Vehicle::find($request->VariantID);
+
+
         $contract = new Contract();
-        dd($request);
+        $contract->client = $client->id;
+        $contract->variant = $variant->id;
+        $contract->year = $request->year;
+        $contract->usetype = $request->type;
+        $contract->insuredamt = $request->insured;
+
+        // dd($contract);
+
+
+        return view('certificate');
     }
 }

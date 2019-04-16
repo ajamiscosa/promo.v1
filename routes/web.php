@@ -154,5 +154,5 @@ Route::get('/testshit', function(){
 });
 
 Route::get('/testshit/print', function(){
-    return view('welcome');
+    return view('certificate-print');
 });
