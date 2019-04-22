@@ -282,7 +282,8 @@ class InquiryController extends Controller
             $contract->mortgagee = ucwords($request->Mortgagee);
             $contract->receivername = ucwords($request->Receiver);
             $contract->generateReferenceNumber();
-            $contract->agency = $request->Agency->id;
+            $contract->agency = $request->Agency;
+
             $contract->save();
         });
 
