@@ -14,6 +14,9 @@ use App\PropertyDamage;
 use App\Insurer;
 use App\Contract;
 use App\Vehicle;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Session\TokenMismatchException;
 
 class InquiryController extends Controller
 {
@@ -206,6 +209,7 @@ class InquiryController extends Controller
         $inquiry = Inquiry::find($request->Inquiry);
 
         $dto = new DTO();
+        $dto->Agency = Insurer::find($request->Agency);
         $dto->InsuredValue = $request->InsuredValue;
         $dto->BodilyInjury = $request->BodilyInjury;
         $dto->PropertyDamage = $request->PropertyDamage;
@@ -231,29 +235,69 @@ class InquiryController extends Controller
         $dto->Premium = $request->Premium;
         $dto->Rate = $request->Rate;
         $dto->AOGPrice = $request->AOGPrice;
-
-        // dd($dto);
+        $dto->Agency = Insurer::find($request->Agency);
 
         $client = AppClient::find($request->ClientID);
-        $client->middlename = $request->MiddleName;
-        $client->addressline1 = $request->StreetLine1;
-        $client->brgy = $request->BarangayId;
-        $client->fulladdress = $client->getCompleteAddress($request->Village);
-        // $client->save();
-
-        $variant = Vehicle::find($request->VariantID);
-
 
         $contract = new Contract();
-        $contract->client = $client->id;
-        $contract->variant = $variant->id;
-        $contract->year = $request->year;
-        $contract->usetype = $request->type;
-        $contract->insuredamt = $request->insured;
 
-        // dd($contract);
+        DB::transaction(function() use ($request, $client, $contract) {
 
+            $client = AppClient::find($request->ClientID);
+            $client->lastname = $request->LastName;
+            $client->middlename = $request->MiddleName;
+            $client->firstname = $request->FirstName;
+            $client->email = $request->Email;
+            $client->phonenumber = $request->PhoneNumber;
+            $client->mobilenumber = $request->MobileNumber;
+            $client->addressline1 = $request->StreetLine1;
+            $client->brgy = $request->BarangayId;
+            $client->fulladdress = $client->getCompleteAddress($request->Village);
+            $client->save();
 
-        return view('certificate');
+            $variant = Vehicle::find($request->VariantID);
+
+            $contract->usetype = $request->Type;
+            $contract->client = $client->id;
+            $contract->variant = $variant->id;
+            $contract->year = $request->Year;
+            $contract->color = $request->Color;
+
+            $contract->premium = $request->Premium;
+            $contract->insuredamt = $request->InsuredValue;
+            $contract->chassisnum = $request->Chassis;
+            $contract->motornum = $request->MVFileNumber;
+            $contract->platenum = $request->PlateNo;
+
+            $contract->pa = $request->PersonalAccident;
+            $contract->bi = $request->BodilyInjury;
+            $contract->pd = $request->PropertyDamage;
+            $contract->aog = $request->AOGPrice;
+            $contract->rate = $request->Rate;
+
+            $contract->prefdeliverydate = Carbon::parse($request->DeliveryDate);
+            $contract->effectivedate = Carbon::parse($request->EffectiveDate);
+            $contract->paymentmode = $request->PaymentPlan;
+
+            $contract->mortgagee = ucwords($request->Mortgagee);
+            $contract->receivername = ucwords($request->Receiver);
+            $contract->generateReferenceNumber();
+            $contract->agency = $request->Agency->id;
+            $contract->save();
+        });
+
+        $hash = csrf_token();
+        return redirect()->to("/vehicle-insurance/contract?cid={$client->id}&ref={$contract->refno}&hash={$hash}");
+    }
+
+    public function viewcertificate(Request $request) {
+        if($request->hash == csrf_token()) {
+            $client = AppClient::find($request->cid);
+            $contract = Contract::where('refno','=',$request->ref)->firstOrFail();
+
+            return view('certificate', ['data'=>$contract, 'client'=>$client]);
+        } else {
+            throw \Exception("Invalid hash.");
+        }
     }
 }

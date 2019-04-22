@@ -55,19 +55,19 @@ table {
         This is to certify that the insured, named below, is insured as described below.
             <table class="bordered" style="width: 100%;">
                 <tr>
-                    <td class="bordered" width="67%" rowspan="2" style="vertical-align: top;">&nbsp;Insured Name & Address</td>
-                    <td class="bordered">&nbsp;Telephone Number<br/>&nbsp;(        )</td>
+                    <td class="bordered" width="67%" rowspan="2" style="vertical-align: top;">&nbsp;<b>Insured Name & Address</b>
+                        <p>&nbsp;{{ $client->getName() }}<br/>
+                            &nbsp;{{ $client->getCompleteAddress() }}
+                        </p>
+                    </td>
+                    <td class="bordered">&nbsp;<b>Telephone Number</b><br/>&nbsp;{{ $client->phonenumber??'(        )' }}</td>
                 </tr>
                 <tr>
-                    <td class="bordered">&nbsp;Fax Number<br/>&nbsp;(        )</td>
-                </tr>
-                <tr>
-                    <td class="bordered" colspan="2">&nbsp;Location and nature of operation or contract to which this Certificate applies.</td>
+                    <td class="bordered">&nbsp;<b>Mobile Number</b><br/>&nbsp;{{ $client->mobilenumber??'(        )' }}</td>
                 </tr>
             </table>
         </div>
     </div>
-    <br/>
     <br/>
     <div class="row">
         <div class="col-lg-12">
@@ -82,14 +82,26 @@ table {
                     <th class="bordered text-center">Expiry</th>
                 </tr>
                 <tr>
-                    <td class="bordered">Woop Company</td>
-                    <td class="bordered text-center">09/20/2019</td>
-                    <td class="bordered text-center">09/19/2020</td>
+                    <td class="bordered text-center">&nbsp;{{ $data->getAgency()->name }}</td>
+                    <td class="bordered text-center">{{ $data->effectivedate->format('F d, Y')}}</td>
+                    <td class="bordered text-center">{{ $data->effectivedate->addYears(1)->format('F d, Y')}}</td>
                     <td>
                         <table style="width: 100%;">
                             <tr>
-                                <td>Personal Injury:</td>
-                                <td class="text-right">P200,000.00</td>
+                                <td>&nbsp;Amount Insured:</td>
+                                <td class="text-right">P{{ number_format($data->insuredamt,2,'.',',') }}&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;Bodily Injury:</td>
+                                <td class="text-right">P{{ number_format($data->bi,2,'.',',') }}&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;Property Damage:</td>
+                                <td class="text-right">P{{ number_format($data->pd,2,'.',',') }}&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;Personal Accident:</td>
+                                <td class="text-right">P{{ number_format($data->pa,2,'.',',') }}&nbsp;</td>
                             </tr>
                         </table>
                     </td>
@@ -97,10 +109,51 @@ table {
             </table>
         </div>
     </div>
+    <hr style="border-top: dashed 1px;" />
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="bordered" style="width: 100%;">
+                <tr>
+                    <td class="bordered" width="67%" rowspan="2" style="vertical-align: top;">&nbsp;<b>Insured Name & Address</b>
+                        <p>&nbsp;{{ $client->getName() }}<br/>
+                            &nbsp;{{ $client->getCompleteAddress() }}
+                        </p>
+                    </td>
+                    <td class="bordered">&nbsp;<b>Telephone Number</b><br/>&nbsp;{{ $client->phonenumber??'(        )' }}</td>
+                </tr>
+                <tr>
+                    <td class="bordered">&nbsp;<b>Mobile Number</b><br/>&nbsp;{{ $client->mobilenumber??'(        )' }}</td>
+                </tr>
+                <tr>
+                    <td class="bordered">
+                        &nbsp;{{ $data->getAgency()->name }} Standard Vehicle Insurance
+                    </td>
+                    <td class="bordered">&nbsp;<b>Total Premium</b><br/>&nbsp;P{{ number_format($data->premium,2,'.',',') }}&nbsp;</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">
+                        &nbsp;{{ $data->paymentmode }} months installment plan
+                    </td>
+                    <td></td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+                @for($i=0;$i<$data->paymentmode;$i++)
+                    <tr>
+                        <td>
+                        &emsp;&emsp;&emsp;Installment # {{ $i+1 }}
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ $data->prefdeliverydate->addMonths($i)->format('F d, Y')}}
+                        </td>
+                        <td>&nbsp;P{{ number_format($data->premium/$data->paymentmode,2,'.',',') }}&nbsp;</td>
+                    </tr>
+                @endfor
+                <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+            </table>
+        </div>
+    </div>
   </section>
   <!-- /.content -->
 </div>
 <!-- ./wrapper -->
-
 
 </body></html>

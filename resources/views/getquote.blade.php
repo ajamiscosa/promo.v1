@@ -149,6 +149,7 @@
                         <input type="hidden" name="AOGPrice" value="{{ $data->AOGPrice }}">
                         <input type="hidden" name="Client" value="{{ $data->Client }}">
                         <input type="hidden" name="Inquiry" value="{{ $data->Inquiry }}">
+                        <input type="hidden" name="Agency" value="{{ $data->Agency->id }}">
                         <button type="submit" role="button" class="btn btn-primary btn-block">Continue</button>
                     </form>
                 </div>

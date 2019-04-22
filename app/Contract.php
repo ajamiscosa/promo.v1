@@ -9,6 +9,7 @@ class Contract extends Model
     //
     protected $table = "contracts";
     protected $fillable = [
+        'refno',
         'client',
         'variant',
         'year',
@@ -28,10 +29,33 @@ class Contract extends Model
         'mortgagee',
         'prefdeliverydate',
         'receivername',
-        'paymentmode'
+        'paymentmode',
+        'agency'
     ];
 
     protected $dates = [
-        'effectivedate'
+        'effectivedate','prefdeliverydate'
     ];
+
+    public function getAgency() {
+        return $this->belongsTo('App\Insurer','agency','id')->firstOrFail();
+    }
+
+    public function generateReferenceNumber() {
+        $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        $randomString = '';
+
+        for ($i = 0; $i < 16; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+
+        try {
+            $inquiry = $this->where('refno','=',$randomString)->firstOrFail();
+            $this->generateReferenceNumber();
+        }catch(\Exception $e) {
+            $this->refno = $randomString;
+        }
+
+    }
 }
